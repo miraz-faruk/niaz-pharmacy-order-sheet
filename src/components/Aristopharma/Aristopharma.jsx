@@ -44,7 +44,8 @@ const Aristopharma = () => {
         let yPosition = 10;
 
         // Set header
-        doc.setFontSize(16);
+        doc.setFontSize(20);
+        doc.setTextColor('Blue');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
 
@@ -53,6 +54,7 @@ const Aristopharma = () => {
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
+        doc.text("Type", 50, yPosition);
         doc.text("Quantity", 120, yPosition); // Adjust position as needed
         yPosition += 10;
 
@@ -65,6 +67,7 @@ const Aristopharma = () => {
 
         selectedItems.forEach(item => {
             doc.text(item.name, 10, yPosition);
+            doc.text(item.type, 50, yPosition); // Add item type
             doc.text(item.quantity.toString(), 120, yPosition); // Adjust position as needed
             yPosition += 10;
         });
