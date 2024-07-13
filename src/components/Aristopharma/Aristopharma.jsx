@@ -42,18 +42,36 @@ const Aristopharma = () => {
     const handleBuyNow = () => {
         const doc = new jsPDF();
         let yPosition = 10;
+
+        // Set header
         doc.setFontSize(16);
-        doc.text("Selected Items:", 10, yPosition);
+        doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
+
+        // Set column headers
+        doc.setFontSize(12);
+        doc.setTextColor('black');
+        doc.setFont('helvetica', 'bold');
+        doc.text("Item Name", 10, yPosition);
+        doc.text("Quantity", 120, yPosition); // Adjust position as needed
+        yPosition += 10;
+
+        // Draw a line under the header
+        doc.line(10, yPosition, 200, yPosition); // Adjust line length if needed
+        yPosition += 5;
+
+        // Set font for items
+        doc.setFont('helvetica', 'normal');
+
         selectedItems.forEach(item => {
-            doc.setFontSize(12);
-            doc.setTextColor('black'); // red color
-            doc.setFont('helvetica', 'bold');
-            doc.text(`${item.name} ${item.type} - ${item.quantity}`, 10, yPosition);
+            doc.text(item.name, 10, yPosition);
+            doc.text(item.quantity.toString(), 120, yPosition); // Adjust position as needed
             yPosition += 10;
         });
+
         doc.save('Aristopharma Cardiac items.pdf');
     };
+
 
     const items = [
         { name: 'Linaglip', type: 'Tablet' },
