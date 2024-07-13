@@ -52,7 +52,7 @@ const Aristopharma = () => {
         doc.setFontSize(12);
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
-        doc.text("Item Name", 10, yPosition);
+        doc.text("Items Name", 10, yPosition);
         doc.text("Quantity", 120, yPosition); // Adjust position as needed
         yPosition += 10;
 
