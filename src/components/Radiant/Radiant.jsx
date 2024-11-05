@@ -58,8 +58,8 @@ const Radiant = () => {
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
-        doc.text("Type", 80, yPosition);
-        doc.text("Quantity", 150, yPosition); // Adjust position as needed
+        // doc.text("Type", 80, yPosition);
+        doc.text("Quantity", 100, yPosition); // Adjust position as needed
         yPosition += 10;
 
         // Draw a line under the header
@@ -71,8 +71,8 @@ const Radiant = () => {
 
         selectedItems.forEach(item => {
             doc.text(item.name, 10, yPosition);
-            doc.text(item.type, 80, yPosition); // Add item type
-            doc.text(item.quantity.toString(), 150, yPosition); // Adjust position as needed
+            // doc.text(item.type, 80, yPosition); // Add item type
+            doc.text(item.quantity.toString(), 100, yPosition); // Adjust position as needed
             yPosition += 10;
         });
 
@@ -81,66 +81,66 @@ const Radiant = () => {
 
 
     const items = [
-        { name: 'Acos FC Tab 500mg (6s)', type: 'Tablet' },
-        { name: 'Acteria Sachet 4 billion (20s)', type: 'Sachet' },
-        { name: 'ATOZ Premium FC Tab (45s)', type: 'Tablet' },
-        { name: 'ATOZ Senior FC Tab (45s)', type: 'Tablet' },
-        { name: 'Avenac FC Tab 100mg (50s)', type: 'Tablet' },
-        { name: 'Coralcal-D FC Tab 500mg/200IU (60s)', type: 'Tablet' },
-        { name: 'Coralcal-DX FC Tab 600mg/400IU (50s)', type: 'Tablet' },
-        { name: 'Coralcal Vita Effer Tab 600mg/4001U (16s)', type: 'Tablet' },
-        { name: 'Efodio FC Tab 10mg (100s)', type: 'Tablet' },
-        { name: 'Exium Cap 20mg (100s)', type: 'Capsule' },
-        { name: 'Exium Cap 40mg (60s)', type: 'Capsule' },
-        { name: 'Exium MUPS FC Tab 20mg (80s)', type: 'Tablet' },
-        { name: 'Exium MUPS FC Tab 40mg (40s)', type: 'Tablet' },
-        { name: 'Fabetor FC Tab 120mg (20s)', type: 'Tablet' },
-        { name: 'Fabetor FC Tab 60mg (50s)', type: 'Tablet' },
-        { name: 'Fabetor FC Tab 90mg (30s)', type: 'Tablet' },
-        { name: 'Fastel FC Tab 120mg (50s)', type: 'Tablet' },
-        { name: 'Fastel FC Tab 180mg (30s)', type: 'Tablet' },
-        { name: 'Feeliz FC Tab 12.5mg/5mg (60s)', type: 'Tablet' },
+        { name: 'Acos FC Tab 500mg', type: 'Tablet' },
+        { name: 'Acteria Sachet 4 billion', type: 'Sachet' },
+        { name: 'ATOZ Premium FC Tab', type: 'Tablet' },
+        { name: 'ATOZ Senior FC Tab', type: 'Tablet' },
+        { name: 'Avenac FC Tab 100mg', type: 'Tablet' },
+        { name: 'Coralcal-D FC Tab 500mg', type: 'Tablet' },
+        { name: 'Coralcal-DX FC Tab 600mg', type: 'Tablet' },
+        { name: 'Coralcal Vita Tab 600mg', type: 'Tablet' },
+        { name: 'Efodio FC Tab 10mg', type: 'Tablet' },
+        { name: 'Exium Cap 20mg', type: 'Capsule' },
+        { name: 'Exium Cap 40mg', type: 'Capsule' },
+        { name: 'Exium MUPS FC Tab 20mg', type: 'Tablet' },
+        { name: 'Exium MUPS FC Tab 40mg', type: 'Tablet' },
+        { name: 'Fabetor FC Tab 120mg', type: 'Tablet' },
+        { name: 'Fabetor FC Tab 60mg', type: 'Tablet' },
+        { name: 'Fabetor FC Tab 90mg', type: 'Tablet' },
+        { name: 'Fastel FC Tab 120mg', type: 'Tablet' },
+        { name: 'Fastel FC Tab 180mg', type: 'Tablet' },
+        { name: 'Feeliz FC Tab 12.5mg', type: 'Tablet' },
 
-        { name: 'Carticare FC Tab 250mg/200mg (30s)', type: 'Tablet' },
-        { name: 'Carticare Max FB Tab 750mg/50mg (36s)', type: 'Tablet' },
-        { name: 'Carticare TS FC Tab (20s)', type: 'Tablet' },
-        { name: 'Dormicum FC Tab 7.5mg (30s)', type: 'Tablet' },
-        { name: 'Eggcal-D FC Tab 500mg/200IU (30s)', type: 'Tablet' },
-        { name: 'Eggcal-DX FC Tab 600mg/400IU (30s)', type: 'Tablet' },
-        { name: 'Fylox Tab 200mg (50s)', type: 'Tablet' },
-        { name: 'Fylox Tab 400mg (30s)', type: 'Tablet' },
-        { name: 'Lexotanil Tab 3mg (70s)', type: 'Tablet' },
-        { name: 'Minista Tab 10mg (30s)', type: 'Tablet' },
-        { name: 'Prelica Cap 25mg (30s)', type: 'Capsule' },
-        { name: 'Prelica Cap 50mg (50s)', type: 'Capsule' },
-        { name: 'Prelica Cap 75mg (30s)', type: 'Capsule' },
-        { name: 'Prompton Cap 20mg (100s)', type: 'Capsule' },
-        { name: 'Raditil FC Tab 20mg (50s)', type: 'Tablet' },
-        { name: 'Raditrol Cap 0.25mcg (30s)', type: 'Capsule' },
-        
-        { name: 'Vono EC Tab 10mg (30s)', type: 'Tablet' },
-        { name: 'Vono EC Tab 20mg (30s)', type: 'Tablet' },
-        { name: 'Xyflo Chew Tab 4mg (30s)', type: 'Tablet' },
-        { name: 'Xyflo Chew Tab 5mg (30s)', type: 'Tablet' },
-        { name: 'Xyflo FC Tab 10mg (30s)', type: 'Tablet' },
+        { name: 'Carticare FC Tab 250mg', type: 'Tablet' },
+        { name: 'Carticare Max FB Tab 750mg', type: 'Tablet' },
+        { name: 'Carticare TS FC Tab', type: 'Tablet' },
+        { name: 'Dormicum FC Tab 7.5mg', type: 'Tablet' },
+        { name: 'Eggcal-D FC Tab 500mg', type: 'Tablet' },
+        { name: 'Eggcal-DX FC Tab 600mg', type: 'Tablet' },
+        { name: 'Fylox Tab 200mg', type: 'Tablet' },
+        { name: 'Fylox Tab 400mg', type: 'Tablet' },
+        { name: 'Lexotanil Tab 3mg', type: 'Tablet' },
+        { name: 'Minista Tab 10mg', type: 'Tablet' },
+        { name: 'Prelica Cap 25mg', type: 'Capsule' },
+        { name: 'Prelica Cap 50mg', type: 'Capsule' },
+        { name: 'Prelica Cap 75mg', type: 'Capsule' },
+        { name: 'Prompton Cap 20mg', type: 'Capsule' },
+        { name: 'Raditil FC Tab 20mg', type: 'Tablet' },
+        { name: 'Raditrol Cap 0.25mcg', type: 'Capsule' },
 
-        { name: 'Rivotril Tab 0.25mg (50s)', type: 'Tablet' },
-        { name: 'Rivotril Tab 0.5mg (80s)', type: 'Tablet' },
-        { name: 'Rivotril Tab 1 mg (70s)', type: 'Tablet' },
-        { name: 'Rivotril Tab 2mg (60s)', type: 'Tablet' },
-        { name: 'Rofixim Cap 200mg (10s)', type: 'Capsule' },
-        { name: 'Rofixim Cap 400mg (10s)', type: 'Capsule' },
-        { name: 'Rofuclav FC Tab 250mg/62.5mg (14s)', type: 'Tablet' },
-        { name: 'Rofuclav FC Tab 500mg/125mg (14s)', type: 'Tablet' },
-        { name: 'Toradolin FC Tab 10mg (20s)', type: 'Tablet' },
+        { name: 'Vono EC Tab 10mg', type: 'Tablet' },
+        { name: 'Vono EC Tab 20mg', type: 'Tablet' },
+        { name: 'Xyflo Chew Tab 4mg', type: 'Tablet' },
+        { name: 'Xyflo Chew Tab 5mg', type: 'Tablet' },
+        { name: 'Xyflo FC Tab 10mg', type: 'Tablet' },
 
-        { name: 'Naprosyn DPS 125mg/5ml (50ml)', type: 'Syrup' },
-        { name: 'Naprosyn Tab 250mg (50s)', type: 'Tablet' },
-        { name: 'Naprosyn Tab 500mg (50s)', type: 'Tablet' },
-        { name: 'Naprosyn-Plus Tab 375mg/20mg (50s)', type: 'Tablet' },
-        { name: 'Naprosyn-Plus Tab 500mg/20mg (40s)', type: 'Tablet' },
-        { name: 'Neucos-B FC Tab (50s)', type: 'Tablet' }
-    ];
+        { name: 'Rivotril Tab 0.25mg', type: 'Tablet' },
+        { name: 'Rivotril Tab 0.5mg', type: 'Tablet' },
+        { name: 'Rivotril Tab 1 mg', type: 'Tablet' },
+        { name: 'Rivotril Tab 2mg', type: 'Tablet' },
+        { name: 'Rofixim Cap 200mg', type: 'Capsule' },
+        { name: 'Rofixim Cap 400mg', type: 'Capsule' },
+        { name: 'Rofuclav FC Tab 250mg', type: 'Tablet' },
+        { name: 'Rofuclav FC Tab 500mg', type: 'Tablet' },
+        { name: 'Toradolin FC Tab 10mg', type: 'Tablet' },
+
+        { name: 'Naprosyn DPS 125mg', type: 'Syrup' },
+        { name: 'Naprosyn Tab 250mg', type: 'Tablet' },
+        { name: 'Naprosyn Tab 500mg', type: 'Tablet' },
+        { name: 'Naprosyn-Plus Tab 375mg', type: 'Tablet' },
+        { name: 'Naprosyn-Plus Tab 500mg', type: 'Tablet' },
+        { name: 'Neucos-B FC Tab', type: 'Tablet' }
+    ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <div className='mx-3'>

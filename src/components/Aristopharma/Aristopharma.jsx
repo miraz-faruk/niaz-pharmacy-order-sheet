@@ -58,8 +58,8 @@ const Aristopharma = () => {
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
-        doc.text("Type", 50, yPosition);
-        doc.text("Quantity", 120, yPosition); // Adjust position as needed
+        // doc.text("Type", 50, yPosition);
+        doc.text("Quantity", 100, yPosition); // Adjust position as needed
         yPosition += 10;
 
         // Draw a line under the header
@@ -71,8 +71,8 @@ const Aristopharma = () => {
 
         selectedItems.forEach(item => {
             doc.text(item.name, 10, yPosition);
-            doc.text(item.type, 50, yPosition); // Add item type
-            doc.text(item.quantity.toString(), 120, yPosition); // Adjust position as needed
+            // doc.text(item.type, 50, yPosition); // Add item type
+            doc.text(item.quantity.toString(), 100, yPosition); // Adjust position as needed
             yPosition += 10;
         });
 
@@ -110,7 +110,7 @@ const Aristopharma = () => {
         { name: 'TLC-R 40', type: 'Tablet' },
         { name: 'Clocard', type: 'Tablet' },
         { name: 'Clocard-A', type: 'Tablet' }
-    ];
+    ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <div className='mx-3'>
