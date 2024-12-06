@@ -148,7 +148,7 @@ const Aristopharma = () => {
     return (
         <div className='mx-3'>
             <h2 className='text-lg font-medium'>Cardiac Items</h2>
-            <h2>{items.length}</h2>
+            {/* <h2>{items.length}</h2> */}
             <div className='my-2'>
                 <hr />
             </div>
