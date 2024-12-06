@@ -58,7 +58,7 @@ const Aristopharma = () => {
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
-        doc.text("Quantity", 100, yPosition); // Adjust position as needed
+        doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
         yPosition += 10;
 
         // Draw a line under the header
@@ -70,7 +70,11 @@ const Aristopharma = () => {
 
         selectedItems.forEach(item => {
             doc.text(item.name, 10, yPosition);
-            doc.text(item.quantity.toString(), 100, yPosition); // Adjust position as needed
+
+            // Calculate position for quantity to be right-aligned
+            const quantityWidth = doc.getTextWidth(item.quantity.toString());
+            const quantityX = 105 - quantityWidth; // Right-align the quantity
+            doc.text(item.quantity.toString(), quantityX, yPosition); // Right-aligned quantity
             yPosition += 10;
         });
 
