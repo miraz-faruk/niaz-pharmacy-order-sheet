@@ -7,7 +7,7 @@ const Header = () => {
             isActive
                 ? 'text-[#23BE0A] border border-[#23BE0A] font-semibold text-lg'
                 : 'text-[#131313CC] text-lg'
-        }>Aristopharma</NavLink></li>
+        }></NavLink></li>
     </>
 
     return (

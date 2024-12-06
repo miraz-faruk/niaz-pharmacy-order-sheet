@@ -45,20 +45,19 @@ const Aristopharma = () => {
 
         // Set header
         doc.setFontSize(20);
-        doc.setTextColor('Blue');
+        doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
         const date = new Date().toLocaleDateString(); // Get current date
         doc.setFontSize(12);
-        doc.text(`Date: ${date}`, 10, yPosition); // Add date to PDF header
-        yPosition += 10;
+        doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
+        yPosition += 5;
 
         // Set column headers
         doc.setFontSize(12);
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
-        // doc.text("Type", 50, yPosition);
         doc.text("Quantity", 100, yPosition); // Adjust position as needed
         yPosition += 10;
 
@@ -71,7 +70,6 @@ const Aristopharma = () => {
 
         selectedItems.forEach(item => {
             doc.text(item.name, 10, yPosition);
-            // doc.text(item.type, 50, yPosition); // Add item type
             doc.text(item.quantity.toString(), 100, yPosition); // Adjust position as needed
             yPosition += 10;
         });
@@ -79,42 +77,74 @@ const Aristopharma = () => {
         doc.save('Aristopharma Cardiac items.pdf');
     };
 
-
+    // Sort items alphabetically
     const items = [
-        { name: 'Linaglip'},
-        { name: 'Linaglip-M 2.5/500'},
-        { name: 'Linaglip-M 2.5/850'},
-        { name: 'Linaglip-M 5/1000'},
-        { name: 'Ancor-2.5'},
-        { name: 'Ancor-5'},
-        { name: 'Ancor-10'},
-        { name: 'Ancor-A 2.5/5'},
-        { name: 'Ancor Plus-2.5'},
-        { name: 'Ancor Plus-5'},
-        { name: 'Metacard MR'},
-        { name: 'Gluvan'},
-        { name: 'Gluvan Plus 500'},
-        { name: 'Gluvan Plus 850'},
-        { name: 'Nitrocard SR'},
-        { name: 'Nitrocard'},
-        { name: 'Empaglif 10'},
-        { name: 'Empaglif 25'},
-        { name: 'Empaglif-M 5/500'},
-        { name: 'Duoblock 5/20'},
-        { name: 'Duoblock 5/40'},
-        { name: 'Ruvastin-5'},
-        { name: 'Ruvastin-10'},
-        { name: 'Ruvastin-20'},
-        { name: 'TCL-R 10'},
-        { name: 'TLC-R 20'},
-        { name: 'TLC-R 40'},
-        { name: 'Clocard'},
-        { name: 'Clocard-A'}
+        { name: 'Agoxin' },
+        { name: 'Ancor-2.5' },
+        { name: 'Ancor-5' },
+        { name: 'Ancor-10' },
+        { name: 'Ancor-A 2.5/5' },
+        { name: 'Ancor Plus-2.5' },
+        { name: 'Ancor Plus-5' },
+        { name: 'Centiva 100' },
+        { name: 'Cilnipin 5' },
+        { name: 'Cilnipin 10' },
+        { name: 'Clocard' },
+        { name: 'Clocard-A' },
+        { name: 'Duoblock 5/20' },
+        { name: 'Duoblock 5/40' },
+        { name: 'Empaglif 10' },
+        { name: 'Empaglif 25' },
+        { name: 'Empaglif-M 5/500' },
+        { name: 'Gluconor 1' },
+        { name: 'Gluconor 2' },
+        { name: 'Glucomet 500' },
+        { name: 'Glucomet 500 XR' },
+        { name: 'Glucomet 750 XR' },
+        { name: 'Glucomet 850' },
+        { name: 'Glucozid' },
+        { name: 'Glucozid MR 30' },
+        { name: 'Glucozid MR 60' },
+        { name: 'Gluvan' },
+        { name: 'Gluvan Plus 500' },
+        { name: 'Gluvan Plus 850' },
+        { name: 'Insulet 3O/70 Inj' },
+        { name: 'Lacicard-2' },
+        { name: 'Lacicard-4' },
+        { name: 'Limpa 5/10' },
+        { name: 'Limpa 5/25' },
+        { name: 'Linaglip' },
+        { name: 'Linaglip-M 2.5/500' },
+        { name: 'Linaglip-M 2.5/850' },
+        { name: 'Linaglip-M 5/1000' },
+        { name: 'Lodicard' },
+        { name: 'Lodipin-5' },
+        { name: 'Maxineb 2.5' },
+        { name: 'Maxineb 5' },
+        { name: 'Metacard MR' },
+        { name: 'Nitrocard' },
+        { name: 'Nitrocard SR' },
+        { name: 'Nitrocard Spray' },
+        { name: 'Osartan 50' },
+        { name: 'Osartan-HZ' },
+        { name: 'Pitavas' },
+        { name: 'Ruvastin-5' },
+        { name: 'Ruvastin-10' },
+        { name: 'Ruvastin-20' },
+        { name: 'TCL-R 10' },
+        { name: 'TCL-R 20' },
+        { name: 'TCL-R 40' },
+        { name: 'Temcard 20' },
+        { name: 'Temcard 40' },
+        { name: 'Temcard 80' },
+        { name: 'Temcard-A 40/5' },
+        { name: 'Temcard-A 80/5' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <div className='mx-3'>
             <h2 className='text-lg font-medium'>Cardiac Items</h2>
+            <h2>{items.length}</h2>
             <div className='my-2'>
                 <hr />
             </div>
@@ -156,7 +186,9 @@ const Aristopharma = () => {
                         </li>
                     ))}
                 </ul>
-                <button className='btn my-5 bg-blue-500 text-white text-xl' onClick={handleBuyNow}>Buy Now</button>
+                <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
+                    Generate Order Sheet
+                </button>
             </div>
         </div>
     );

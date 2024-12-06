@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Banner from '../Banner/Banner';
 import Aristopharma from '../Aristopharma/Aristopharma';
-import Radiant from '../Radiant/Radiant'; // Assuming you have a Radiant component
+import Radiant from '../Radiant/Radiant';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);

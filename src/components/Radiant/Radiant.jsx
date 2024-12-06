@@ -45,12 +45,12 @@ const Radiant = () => {
 
         // Set header
         doc.setFontSize(20);
-        doc.setTextColor('Blue');
+        doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
         const date = new Date().toLocaleDateString(); // Get current date
         doc.setFontSize(12);
-        doc.text(`Date: ${date}`, 10, yPosition); // Add date to PDF header
+        doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
         yPosition += 10;
 
         // Set column headers
@@ -186,7 +186,7 @@ const Radiant = () => {
                         </li>
                     ))}
                 </ul>
-                <button className='btn my-5 bg-blue-500 text-white text-xl' onClick={handleBuyNow}>Buy Now</button>
+                <button className='btn my-5 bg-blue-500 text-white text-xl' onClick={handleBuyNow}>Generate Order Sheet</button>
             </div>
         </div>
     );
