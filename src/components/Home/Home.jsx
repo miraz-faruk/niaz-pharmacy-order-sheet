@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Banner from '../Banner/Banner';
 import Aristopharma from '../Aristopharma/Aristopharma';
 import Radiant from '../Radiant/Radiant';
+import Healthcare from '../Healthcare/Healthcare';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -26,12 +27,19 @@ const Home = () => {
                 >
                     Radiant
                 </button>
+                <button
+                    className="btn bg-pink-700 text-white mx-2"
+                    onClick={() => handleCompanySelect('Healthcare')}
+                >
+                    Healthcare
+                </button>
             </div>
 
             {/* Conditionally render the selected company's products */}
             <div className="product-list my-5">
                 {selectedCompany === 'Aristopharma' && <Aristopharma />}
                 {selectedCompany === 'Radiant' && <Radiant />}
+                {selectedCompany === 'Healthcare' && <Healthcare />}
             </div>
         </div>
     );
