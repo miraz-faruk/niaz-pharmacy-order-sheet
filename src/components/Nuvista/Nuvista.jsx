@@ -224,7 +224,28 @@ const Nuvista = () => {
         { name: 'Deca-Durabolin Inj.50 mg' },
         { name: 'Delanzo 30mg Capsule' },
         { name: 'Dinogest Tablet 2 mg' },
-        // Add more items here...
+        { name: 'Dydron F.C. Tablet 10mg' },
+        { name: 'Elisa F.C. Tablet' },
+        { name: 'Freemax F.C. Tablet 100 mg' },
+        { name: 'Linda-S DS Injection 10 I.U.' },
+        { name: 'Lynes Tablet' },
+        { name: 'Marvelon Tablet' },
+        { name: 'Microlon Tablet' },
+        { name: 'Norestin Tablet 5 mg' },
+        { name: 'Oradexon Tablet 0.5 mg' },
+        { name: 'Orgatril Tablet 5 mg' },
+        { name: 'Ovestin Tablet 1 mg' },
+        { name: 'Ovostat Gold Tablet' },
+        { name: 'Roxadex Injection 5 mg' },
+        { name: 'Thyronor 25 Tablet' },
+        { name: 'Tibilon Tablet 2.5 mg' },
+        { name: 'Traxyl Capsule 500 mg' },
+        { name: 'Visceralgine F.C. Tablet 50 mg' },
+        { name: 'Zoleta F.C. Tablet 2.5 mg' },
+        { name: 'Thyronor 12.50' },
+        { name: 'Thyronor 50' },
+        { name: 'Thyronor 75' },
+        { name: 'Thyronor 100' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

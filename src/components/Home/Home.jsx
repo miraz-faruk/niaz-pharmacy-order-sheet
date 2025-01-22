@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <div>
             <Banner />
-            <div className="button-container text-center my-5">
+            <div className="button-container text-center my-5 grid grid-cols-3 gap-3">
                 <button
                     className="btn bg-blue-500 text-white mx-2"
                     onClick={() => handleCompanySelect('Aristopharma')}
