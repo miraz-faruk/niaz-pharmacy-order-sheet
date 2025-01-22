@@ -3,6 +3,7 @@ import Banner from '../Banner/Banner';
 import Aristopharma from '../Aristopharma/Aristopharma';
 import Radiant from '../Radiant/Radiant';
 import Healthcare from '../Healthcare/Healthcare';
+import Nuvista from '../Nuvista/Nuvista';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -33,6 +34,12 @@ const Home = () => {
                 >
                     Healthcare
                 </button>
+                <button
+                    className="btn bg-purple-700 text-white mx-2"
+                    onClick={() => handleCompanySelect('Nuvista')}
+                >
+                    Nuvista
+                </button>
             </div>
 
             {/* Conditionally render the selected company's products */}
@@ -40,6 +47,7 @@ const Home = () => {
                 {selectedCompany === 'Aristopharma' && <Aristopharma />}
                 {selectedCompany === 'Radiant' && <Radiant />}
                 {selectedCompany === 'Healthcare' && <Healthcare />}
+                {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
             </div>
         </div>
     );
