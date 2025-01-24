@@ -41,10 +41,6 @@ const Header = () => {
                     {links}
                 </ul>
             </div>
-            {/* <div className="navbar-end gap-2 md:gap-4">
-                <a className="bg-[#23BE0A] text-white text-sm md:text-lg font-semibold md:px-7 md:py-4 px-4 py-2 rounded-lg">Sign In</a>
-                <a className="bg-[#59C6D2] text-white text-sm md:text-lg font-semibold md:px-7 md:py-4 px-4 py-2 rounded-lg">Sign Up</a>
-            </div> */}
         </div>
     );
 };

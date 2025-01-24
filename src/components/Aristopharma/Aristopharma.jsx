@@ -48,10 +48,16 @@ const Aristopharma = () => {
         doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
+
         const date = new Date().toLocaleDateString(); // Get current date
         doc.setFontSize(12);
         doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
-        yPosition += 5;
+
+        // Add company full name under Niaz Pharmacy and Date
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text("Aristopharma Ltd", 10, yPosition); // Full company name
+        yPosition += 12;
 
         // Set column headers
         doc.setFontSize(12);
@@ -59,11 +65,11 @@ const Aristopharma = () => {
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
         doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
-        yPosition += 10;
+        yPosition += 5;
 
         // Draw a line under the header
         doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
-        yPosition += 10;
+        yPosition += 8;
 
         // Set font for items
         doc.setFont('helvetica', 'normal');
@@ -78,7 +84,7 @@ const Aristopharma = () => {
             yPosition += 10;
         });
 
-        doc.save('Aristopharma Cardiac items.pdf');
+        doc.save('Aristopharma Ltd.pdf');
     };
 
     // Sort items alphabetically

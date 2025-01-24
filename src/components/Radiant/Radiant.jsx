@@ -48,10 +48,16 @@ const Radiant = () => {
         doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
+
         const date = new Date().toLocaleDateString(); // Get current date
         doc.setFontSize(12);
         doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
-        yPosition += 10;
+
+        // Add company full name under Niaz Pharmacy and Date
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text("Radiant Pharmaceuticals Limited", 10, yPosition); // Full company name
+        yPosition += 12;
 
         // Set column headers
         doc.setFontSize(12);
@@ -59,11 +65,11 @@ const Radiant = () => {
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
         doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
-        yPosition += 10;
+        yPosition += 5;
 
         // Draw a line under the header
         doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
-        yPosition += 10;
+        yPosition += 8;
 
         // Set font for items
         doc.setFont('helvetica', 'normal');
@@ -78,70 +84,69 @@ const Radiant = () => {
             yPosition += 10;
         });
 
-        doc.save('Radiant Pharmaceuticals.pdf');
+        doc.save('Radiant Pharmaceuticals Limited.pdf');
     };
 
-
     const items = [
-        { name: 'Acos Tab 500mg'},
-        { name: 'Acteria 4 billion'},
-        { name: 'ATOZ Premium Tab'},
-        { name: 'ATOZ Senior Tab'},
-        { name: 'Avenac Tab 100mg'},
-        { name: 'Coralcal-D Tab 500mg'},
-        { name: 'Coralcal-DX Tab 600mg'},
-        { name: 'Coralcal Vita Tab 600mg'},
-        { name: 'Efodio Tab 10mg'},
-        { name: 'Exium Cap 20mg'},
-        { name: 'Exium Cap 40mg'},
-        { name: 'Exium MUPS Tab 20mg'},
-        { name: 'Exium MUPS Tab 40mg'},
-        { name: 'Fabetor Tab 120mg'},
-        { name: 'Fabetor Tab 60mg'},
-        { name: 'Fabetor Tab 90mg'},
-        { name: 'Fastel Tab 120mg'},
-        { name: 'Fastel Tab 180mg'},
-        { name: 'Feeliz Tab 12.5mg'},
+        { name: 'Acos Tab 500mg' },
+        { name: 'Acteria 4 billion' },
+        { name: 'ATOZ Premium Tab' },
+        { name: 'ATOZ Senior Tab' },
+        { name: 'Avenac Tab 100mg' },
+        { name: 'Coralcal-D Tab 500mg' },
+        { name: 'Coralcal-DX Tab 600mg' },
+        { name: 'Coralcal Vita Tab 600mg' },
+        { name: 'Efodio Tab 10mg' },
+        { name: 'Exium Cap 20mg' },
+        { name: 'Exium Cap 40mg' },
+        { name: 'Exium MUPS Tab 20mg' },
+        { name: 'Exium MUPS Tab 40mg' },
+        { name: 'Fabetor Tab 120mg' },
+        { name: 'Fabetor Tab 60mg' },
+        { name: 'Fabetor Tab 90mg' },
+        { name: 'Fastel Tab 120mg' },
+        { name: 'Fastel Tab 180mg' },
+        { name: 'Feeliz Tab 12.5mg' },
 
-        { name: 'Carticare Tab 250mg'},
-        { name: 'Carticare Max Tab 750mg'},
-        { name: 'Carticare TS Tab'},
-        { name: 'Dormicum Tab 7.5mg'},
-        { name: 'Eggcal-D Tab 500mg'},
-        { name: 'Eggcal-DX Tab 600mg'},
-        { name: 'Fylox Tab 200mg'},
-        { name: 'Fylox Tab 400mg'},
-        { name: 'Lexotanil Tab 3mg'},
-        { name: 'Minista Tab 10mg'},
-        { name: 'Prelica Cap 25mg'},
-        { name: 'Prelica Cap 50mg'},
-        { name: 'Prelica Cap 75mg'},
-        { name: 'Prompton Cap 20mg'},
-        { name: 'Raditil Tab 20mg'},
-        { name: 'Raditrol Cap 0.25mcg'},
+        { name: 'Carticare Tab 250mg' },
+        { name: 'Carticare Max Tab 750mg' },
+        { name: 'Carticare TS Tab' },
+        { name: 'Dormicum Tab 7.5mg' },
+        { name: 'Eggcal-D Tab 500mg' },
+        { name: 'Eggcal-DX Tab 600mg' },
+        { name: 'Fylox Tab 200mg' },
+        { name: 'Fylox Tab 400mg' },
+        { name: 'Lexotanil Tab 3mg' },
+        { name: 'Minista Tab 10mg' },
+        { name: 'Prelica Cap 25mg' },
+        { name: 'Prelica Cap 50mg' },
+        { name: 'Prelica Cap 75mg' },
+        { name: 'Prompton Cap 20mg' },
+        { name: 'Raditil Tab 20mg' },
+        { name: 'Raditrol Cap 0.25mcg' },
 
-        { name: 'Vono EC Tab 10mg'},
-        { name: 'Vono EC Tab 20mg'},
-        { name: 'Xyflo Tab 4mg'},
-        { name: 'Xyflo Tab 5mg'},
-        { name: 'Xyflo Tab 10mg'},
+        { name: 'Vono EC Tab 10mg' },
+        { name: 'Vono EC Tab 20mg' },
+        { name: 'Xyflo Tab 4mg' },
+        { name: 'Xyflo Tab 5mg' },
+        { name: 'Xyflo Tab 10mg' },
 
-        { name: 'Rivotril Tab 0.25mg'},
-        { name: 'Rivotril Tab 0.5mg'},
-        { name: 'Rivotril Tab 1mg'},
-        { name: 'Rivotril Tab 2mg'},
-        { name: 'Rofixim Cap 200mg'},
-        { name: 'Rofixim Cap 400mg'},
-        { name: 'Rofuclav Tab 250mg'},
-        { name: 'Rofuclav Tab 500mg'},
-        { name: 'Toradolin Tab 10mg'},
+        { name: 'Rivotril Tab 0.25mg' },
+        { name: 'Rivotril Tab 0.5mg' },
+        { name: 'Rivotril Tab 1mg' },
+        { name: 'Rivotril Tab 2mg' },
+        { name: 'Rofixim Cap 200mg' },
+        { name: 'Rofixim Cap 400mg' },
+        { name: 'Rofuclav Tab 250mg' },
+        { name: 'Rofuclav Tab 500mg' },
+        { name: 'Toradolin Tab 10mg' },
 
-        { name: 'Naprosyn DPS 125mg'},
-        { name: 'Naprosyn Tab 250mg'},
-        { name: 'Naprosyn Tab 500mg'},
-        { name: 'Naprosyn-Plus Tab 375mg'},
-        { name: 'Naprosyn-Plus Tab 500mg'},
-        { name: 'Neucos-B Tab'}
+        { name: 'Naprosyn DPS 125mg' },
+        { name: 'Naprosyn Tab 250mg' },
+        { name: 'Naprosyn Tab 500mg' },
+        { name: 'Naprosyn-Plus Tab 375mg' },
+        { name: 'Naprosyn-Plus Tab 500mg' },
+        { name: 'Neucos-B Tab' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

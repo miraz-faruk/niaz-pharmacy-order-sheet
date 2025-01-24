@@ -40,46 +40,52 @@ const Healthcare = () => {
     };
 
     const handleBuyNow = () => {
-        const doc = new jsPDF();
-        let yPosition = 10;
-
-        // Set header
-        doc.setFontSize(20);
-        doc.setTextColor('Black');
-        doc.text("Niaz Pharmacy", 10, yPosition);
-        yPosition += 10;
-        const date = new Date().toLocaleDateString(); // Get current date
-        doc.setFontSize(12);
-        doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
-        yPosition += 5;
-
-        // Set column headers
-        doc.setFontSize(12);
-        doc.setTextColor('black');
-        doc.setFont('helvetica', 'bold');
-        doc.text("Items Name", 10, yPosition);
-        doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
-        yPosition += 10;
-
-        // Draw a line under the header
-        doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
-        yPosition += 10;
-
-        // Set font for items
-        doc.setFont('helvetica', 'normal');
-
-        selectedItems.forEach(item => {
-            doc.text(item.name, 10, yPosition);
-
-            // Calculate position for quantity to be right-aligned
-            const quantityWidth = doc.getTextWidth(item.quantity.toString());
-            const quantityX = 105 - quantityWidth; // Right-align the quantity
-            doc.text(item.quantity.toString(), quantityX, yPosition); // Right-aligned quantity
+            const doc = new jsPDF();
+            let yPosition = 10;
+    
+            // Set header
+            doc.setFontSize(20);
+            doc.setTextColor('Black');
+            doc.text("Niaz Pharmacy", 10, yPosition);
             yPosition += 10;
-        });
-
-        doc.save('Healthcare Pharmaceuticals Ltd.pdf');
-    };
+    
+            const date = new Date().toLocaleDateString(); // Get current date
+            doc.setFontSize(12);
+            doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
+    
+            // Add company full name under Niaz Pharmacy and Date
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text("Healthcare Pharmaceuticals Ltd", 10, yPosition); // Full company name
+            yPosition += 12;
+    
+            // Set column headers
+            doc.setFontSize(12);
+            doc.setTextColor('black');
+            doc.setFont('helvetica', 'bold');
+            doc.text("Items Name", 10, yPosition);
+            doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
+            yPosition += 5;
+    
+            // Draw a line under the header
+            doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
+            yPosition += 8;
+    
+            // Set font for items
+            doc.setFont('helvetica', 'normal');
+    
+            selectedItems.forEach(item => {
+                doc.text(item.name, 10, yPosition);
+    
+                // Calculate position for quantity to be right-aligned
+                const quantityWidth = doc.getTextWidth(item.quantity.toString());
+                const quantityX = 105 - quantityWidth; // Right-align the quantity
+                doc.text(item.quantity.toString(), quantityX, yPosition); // Right-aligned quantity
+                yPosition += 10;
+            });
+    
+            doc.save('Healthcare Pharmaceuticals Ltd.pdf');
+        };
 
     // Sort items alphabetically
     const items = [
@@ -163,7 +169,6 @@ const Healthcare = () => {
 
     return (
         <div className='mx-3'>
-            <h2 className='text-lg font-medium'>Healthcare Pharmaceuticals Ltd.</h2>
             <div className='my-2'>
                 <hr />
             </div>
