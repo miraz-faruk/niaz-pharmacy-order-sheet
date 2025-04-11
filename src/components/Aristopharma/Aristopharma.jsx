@@ -5,6 +5,7 @@ import 'jspdf-autotable';
 const Aristopharma = () => {
     const [values, setValues] = useState({});
     const [selectedItems, setSelectedItems] = useState([]);
+    const [activeTab, setActiveTab] = useState('Cardiac'); // 👈 for switching tabs
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
@@ -36,7 +37,6 @@ const Aristopharma = () => {
     // 🛠️ Update the quantity safely even when it's temporarily empty
     const handleUpdateSelectedItem = (e, itemName) => {
         const value = e.target.value;
-
         if (value === '' || /^[0-9]+$/.test(value)) {
             setSelectedItems(prevItems =>
                 prevItems.map(item =>
@@ -45,6 +45,7 @@ const Aristopharma = () => {
             );
         }
     };
+
 
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
     const handleBuyNow = () => {
@@ -94,8 +95,8 @@ const Aristopharma = () => {
         doc.save('Aristopharma.pdf');
     };
 
-    // Sort items alphabetically
-    const items = [
+    // Cardiac items
+    const cardiacItems = [
         { name: 'Agoxin Tab' },
         { name: 'Ancor-2.5' },
         { name: 'Ancor-5' },
@@ -155,57 +156,217 @@ const Aristopharma = () => {
         { name: 'Temcard-A 80/5' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
-    return (
-        <div className='mx-3'>
-            <h2 className='text-lg font-medium'>Cardiac Items</h2>
-            {/* <h2>{items.length}</h2> */}
-            <div className='my-2'>
-                <hr />
-            </div>
-            <div>
-                {items.map(item => (
-                    <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
-                        <p className='col-span-2'>{item.name} <small>{item.type}</small></p>
-                        <input
-                            className='border border-green-200 text-center py-3 px-2 rounded-lg'
-                            type="number"
-                            value={values[item.name] || ''}
-                            onChange={(e) => handleChange(e, item.name)}
-                            min="1"
-                        />
-                        <button
-                            className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
-                            disabled={!values[item.name]}
-                            onClick={() => handleSelect(item.name, item.type)}
-                        >
-                            Select
-                        </button>
-                    </div>
-                ))}
-            </div>
-            <div className='mt-10'>
-                <hr />
-                <h2>Selected Items here:</h2>
-                <ul>
-                    {selectedItems.map((item, index) => (
-                        <li key={index} className='grid grid-cols-4 items-center gap-2'>
-                            <p className='col-span-2'>{item.name} <small>{item.type}</small></p>
-                            <input
-                                className='border border-green-200 py-3 px-2 rounded-lg text-center'
-                                type="number"
-                                value={item.quantity}
-                                onChange={(e) => handleUpdateSelectedItem(e, item.name)}
-                                min="1"
-                            />
-                        </li>
-                    ))}
-                </ul>
-                <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
-                    Generate Order Sheet
-                </button>
-            </div>
-        </div>
-    );
-};
+    // General items
+    const generalItems = [
+        { name: 'A-Mycin Lotion 3%' },
+        { name: 'Acliz Plus Tab' },
+        { name: 'Acliz Tab' },
+        { name: 'Afrin Drop 0.025%' },
+        { name: 'Afrin Drop 0.05%' },
+        { name: 'Anfree Tab' },
+        { name: 'Apetiz Syp' },
+        { name: 'Apetiz Tab' },
+        { name: 'Apuldon Tab' },
+        { name: 'Aristo D3 Cap 20000 IU' },
+        { name: 'Aristo D3 Cap 40000 IU' },
+        { name: 'Aristo D3 Inj 200000 IU/ml' },
+        { name: 'Aristo D3 Tab 2000 IU' },
+        { name: 'Aristo Gold Tab' },
+        { name: 'Aristo Kid Syp' },
+        { name: 'Aristo Mom Tab' },
+        { name: 'Aristo Silver Tab' },
+        { name: 'Aristocort Cream 0.1%' },
+        { name: 'Aristocort Oint 0.1% 10gm' },
+        { name: 'Aristocort Plus Cream 1% 10gm' },
+        { name: 'Aristoderm Cream 0.05% 10gm' },
+        { name: 'Aroflo Inhaler' },
+        { name: 'Arotril Tab 0.5mg' },
+        { name: 'Arotril Tab 1mg' },
+        { name: 'Arotril Tab 2mg' },
+        { name: 'Arotrix Cream 5%' },
+        { name: 'Avolac Syp 100ml' },
+        { name: 'Avolac Syp 200ml' },
+        { name: 'Axim CV Syp' },
+        { name: 'Axim CV Tab 250mg' },
+        { name: 'Axim CV Tab 500mg' },
+        { name: 'Axim Tab 500mg' },
+        { name: 'Axofen Syp 30mg' },
+        { name: 'Axofen Tab 120mg' },
+        { name: 'AZ Syp 200mg 20ml' },
+        { name: 'AZ Tab 500mg' },
+        { name: 'Beclovan Tab 10mg' },
+        { name: 'Beclovan Tab 5mg' },
+        { name: 'Calbon D Tab 500mg' },
+        { name: 'Canalia Cap 30mg' },
+        { name: 'Canalia Cap 60mg' },
+        { name: 'Caspa Tab 200mg 40ml' },
+        { name: 'Caspa Tab 50mg' },
+        { name: 'Clinex Lotion 1%' },
+        { name: 'Clinex Plus Topical Gel 1.2 15gm' },
+        { name: 'Clobesol Cream 0.05% 10gm' },
+        { name: 'Clobesol Oint 0.05% 10gm' },
+        { name: 'Clobesol SA Oint 0.05% 10gm' },
+        { name: 'Contine Tab 200mg' },
+        { name: 'Contine Tab 400mg' },
+        { name: 'Cortisol Syp 5mg 50ml' },
+        { name: 'Cortisol Tab 10mg' },
+        { name: 'Cortisol Tab 5mg' },
+        { name: 'Dermocin Oint 2% 10gm' },
+        { name: 'Dicliz Plus Tab 10mg' },
+        { name: 'Dicliz Plus Tab 20mg' },
+        { name: 'Diprosal Lotion 0.05% 30ml' },
+        { name: 'Docopa Syp 100mg 100ml' },
+        { name: 'Docopa Tab 200mg' },
+        { name: 'Docopa Tab 400mg' },
+        { name: 'Emep Cap 20mg' },
+        { name: 'Emep Cap 40mg' },
+        { name: 'Emep MUPS Tab 20mg' },
+        { name: 'Emep MUPS Tab 40mg' },
+        { name: 'Erdon TR Cap 100mg' },
+        { name: 'Febux Tab 40mg' },
+        { name: 'Flacort Syp 6mg 60ml' },
+        { name: 'Flacort Tab 24mg' },
+        { name: 'Flacort Tab 6mg' },
+        { name: 'Flumetanol Drop 1% 5ml' },
+        { name: 'Flutica Cream 0.05%' },
+        { name: 'Flutica Spray' },
+        { name: 'Fossical-D Tab 500mg IU' },
+        { name: 'Fossical-DX Tab 600mg IU' },
+        { name: 'Fusidate H Cream 2% 10gm' },
+        { name: 'Hepaximin Tab 200mg' },
+        { name: 'Hepaximin Tab 550mg' },
+        { name: 'Ipec-Plus Tab 47mg' },
+        { name: 'Ipec-Super Cap' },
+        { name: 'Itopa-50 Tab 50mg' },
+        { name: 'Ketozol Shampoo 2%' },
+        { name: 'Luiz Cream 1%' },
+        { name: 'Maxicon Syp 480mg 200ml' },
+        { name: 'Maxineb Tab 2.5mg' },
+        { name: 'Maxineb Tab 5mg' },
+        { name: 'Mecol Tab 500 mcg' },
+        { name: 'Mervan SR Tab 200mg' },
+        { name: 'Mervan Tab 100mg' },
+        { name: 'Mirovan Tab 10mg' },
+        { name: 'Mirovan Tab 2.5mg' },
+        { name: 'Mirovan Tab 5mg' },
+        { name: 'Montril Flash Tab 4mg' },
+        { name: 'Montril Tab 10mg' },
+        { name: 'Montril Tab 5mg' },
+        { name: 'Mycon Gel 2% 15gm' },
+        { name: 'Neobion Inj 100mg' },
+        { name: 'Neobion Tab 100mg' },
+        { name: 'Neso Tab 375mg' },
+        { name: 'Neso Tab 500gm' },
+        { name: 'Nexol Syp 15mg 100ml' },
+        { name: 'Nine Seas Syp 100ml' },
+        { name: 'Nitoxin Suspension 100mg 30ml' },
+        { name: 'Nitoxin Tab 500mg' },
+        { name: 'Norzim Tab 12.5mg' },
+        { name: 'Notens Tab 3mg' },
+        { name: 'Omep Cap 20mg' },
+        { name: 'Omep Cap 40mg' },
+        { name: 'Optimox Tab 400mg' },
+        { name: 'Oradol Tab 10mg' },
+        { name: 'Orbuten Cap 400mg' },
+        { name: 'Ovel Tab 500mg' },
+        { name: 'Prostanil MR Cap 0.4mg' },
+        { name: 'Rabe Tab 20mg' },
+        { name: 'Rejoin-D Tab 750mg' },
+        { name: 'Reumacap Cap 25mg' },
+        { name: 'Reumacap SR Cap 75mg' },
+        { name: 'Reumazin Tab 500mg' },
+        { name: 'Rhinil Tab 10mg' },
+        { name: 'Rupa Syp 5mg 60ml' },
+        { name: 'Rupa Tab 10mg' },
+        { name: 'Siloflo Cap 4mg' },
+        { name: 'Siloflo Cap 8mg' },
+        { name: 'Solifen Tab 5mg' },
+        { name: 'Soneta Cream 0.1% 5gm' },
+        { name: 'Soneta Oint 0.1% 5gm' },
+        { name: 'Stafen Syp 1mg 100ml' },
+        { name: 'Stafen Tab 1mg' },
+        { name: 'Terbifin Cream 1% 10gm' },
+        { name: 'Terbifin Tab 250mg' },
+        { name: 'Veralgin Tab 50mg' },
+        { name: 'Vitazin Syp' },
+        { name: 'Vonofix Tab 10mg' },
+        { name: 'Vonofix Tab 20mg' },
+        { name: 'Xicotil Tab 20mg' },
+        { name: 'Xpa XR Tab 665mg' },
+        { name: 'ZnF Tab 5mg' },
+        { name: 'Zofen Tab 0.5mg' },
+      ].sort((a, b) => a.name.localeCompare(b.name));
 
-export default Aristopharma;
+      const currentItems = activeTab === 'Cardiac' ? cardiacItems : generalItems;
+
+      return (
+          <div className='mx-3'>
+              {/* Tabs */}
+              <div className='flex gap-3 my-4'>
+                  <button
+                      className={`btn ${activeTab === 'Cardiac' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                      onClick={() => setActiveTab('Cardiac')}
+                  >
+                      Cardiac
+                  </button>
+                  <button
+                      className={`btn ${activeTab === 'General' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                      onClick={() => setActiveTab('General')}
+                  >
+                      General
+                  </button>
+              </div>
+  
+              <h2 className='text-lg font-medium'>{activeTab} Items</h2>
+              <div className='my-2'>
+                  <hr />
+              </div>
+  
+              <div>
+                  {currentItems.map(item => (
+                      <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
+                          <p className='col-span-2'>{item.name}</p>
+                          <input
+                              className='border border-green-200 text-center py-3 px-2 rounded-lg'
+                              type="number"
+                              value={values[item.name] || ''}
+                              onChange={(e) => handleChange(e, item.name)}
+                              min="1"
+                          />
+                          <button
+                              className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
+                              disabled={!values[item.name]}
+                              onClick={() => handleSelect(item.name, activeTab)}
+                          >
+                              Select
+                          </button>
+                      </div>
+                  ))}
+              </div>
+  
+              <div className='mt-10'>
+                  <hr />
+                  <h2>Selected Items here:</h2>
+                  <ul>
+                      {selectedItems.map((item, index) => (
+                          <li key={index} className='grid grid-cols-4 items-center gap-2'>
+                              <p className='col-span-2'>{item.name} <small>{item.type}</small></p>
+                              <input
+                                  className='border border-green-200 py-3 px-2 rounded-lg text-center'
+                                  type="number"
+                                  value={item.quantity}
+                                  onChange={(e) => handleUpdateSelectedItem(e, item.name)}
+                                  min="1"
+                              />
+                          </li>
+                      ))}
+                  </ul>
+                  <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
+                      Generate Order Sheet
+                  </button>
+              </div>
+          </div>
+      );
+  };
+  
+  export default Aristopharma;
