@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const Healthcare = () => {
     const [values, setValues] = useState({});
@@ -7,30 +8,36 @@ const Healthcare = () => {
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
-        if (!value || /^[1-9]\d*$/.test(value)) {
-            setValues(prevValues => ({
-                ...prevValues,
+        if (value === '' || /^[0-9]\d*$/.test(value)) {
+            setValues(prev => ({
+                ...prev,
                 [itemName]: value
             }));
         }
     };
 
     const handleSelect = (itemName, itemType) => {
-        setSelectedItems(prevItems => {
-            const itemExists = prevItems.find(item => item.name === itemName);
-            if (itemExists) {
-                return prevItems.map(item =>
-                    item.name === itemName ? { ...item, quantity: values[itemName] } : item
-                );
-            } else {
-                return [...prevItems, { name: itemName, type: itemType, quantity: values[itemName] }];
-            }
-        });
+        const quantity = parseInt(values[itemName], 10);
+        if (quantity && quantity > 0) {
+            setSelectedItems(prev => {
+                const existing = prev.find(item => item.name === itemName);
+                const newItem = { name: itemName, type: itemType, quantity };
+                if (existing) {
+                    return prev.map(item =>
+                        item.name === itemName ? newItem : item
+                    );
+                } else {
+                    return [...prev, newItem];
+                }
+            });
+        }
     };
 
+    // 🛠️ Update the quantity safely even when it's temporarily empty
     const handleUpdateSelectedItem = (e, itemName) => {
         const value = e.target.value;
-        if (!value || /^[1-9]\d*$/.test(value)) {
+
+        if (value === '' || /^[0-9]+$/.test(value)) {
             setSelectedItems(prevItems =>
                 prevItems.map(item =>
                     item.name === itemName ? { ...item, quantity: value } : item
@@ -39,52 +46,52 @@ const Healthcare = () => {
         }
     };
 
-    const handleBuyNow = () => {
+    // 🧾 Generate PDF while filtering out empty or zero-quantity items
+        const handleBuyNow = () => {
+            const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
+    
+            if (filteredItems.length === 0) {
+                alert("No valid items to generate PDF!");
+                return;
+            }
+    
             const doc = new jsPDF();
             let yPosition = 10;
     
-            // Set header
             doc.setFontSize(20);
             doc.setTextColor('Black');
             doc.text("Niaz Pharmacy", 10, yPosition);
             yPosition += 10;
     
-            const date = new Date().toLocaleDateString(); // Get current date
+            const date = new Date().toLocaleDateString();
             doc.setFontSize(12);
-            doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
+            doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
     
-            // Add company full name under Niaz Pharmacy and Date
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
-            doc.text("Healthcare Pharmaceuticals Ltd", 10, yPosition); // Full company name
+            doc.text("Healthcare", 10, yPosition);
             yPosition += 12;
     
-            // Set column headers
             doc.setFontSize(12);
             doc.setTextColor('black');
             doc.setFont('helvetica', 'bold');
             doc.text("Items Name", 10, yPosition);
-            doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
+            doc.text("Quantity", 105, yPosition, { align: 'center' });
             yPosition += 5;
-    
-            // Draw a line under the header
-            doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
+            doc.line(5, yPosition, 200, yPosition);
             yPosition += 8;
     
-            // Set font for items
             doc.setFont('helvetica', 'normal');
     
-            selectedItems.forEach(item => {
+            filteredItems.forEach(item => {
                 doc.text(item.name, 10, yPosition);
-    
-                // Calculate position for quantity to be right-aligned
                 const quantityWidth = doc.getTextWidth(item.quantity.toString());
-                const quantityX = 105 - quantityWidth; // Right-align the quantity
-                doc.text(item.quantity.toString(), quantityX, yPosition); // Right-aligned quantity
+                const quantityX = 105 - quantityWidth;
+                doc.text(item.quantity.toString(), quantityX, yPosition);
                 yPosition += 10;
             });
     
-            doc.save('Healthcare Pharmaceuticals Ltd.pdf');
+            doc.save('Healthcare.pdf');
         };
 
     // Sort items alphabetically
@@ -165,6 +172,60 @@ const Healthcare = () => {
         { name: 'Slimfast' },
         { name: 'Vorifast 50' },
         { name: 'Vorifast 200' },
+
+        { name: 'zeropain 10mg' },
+        { name: 'Zilas' },
+        { name: 'Xelpid 10mg' },
+        { name: 'Xelpid 20mg' },
+        { name: 'Xelpid 40mg' },
+        { name: 'Xelcard 5mg' },
+        { name: 'Xelcard 10mg' },
+        { name: 'Vifas' },
+        { name: 'Viset Syrup' },
+        { name: 'Vectra 8mg' },
+        { name: 'Vectra 16mg' },
+        { name: 'Vestar MR' },
+        { name: 'Tinactin Cream' },
+        { name: 'Tamisol MR Capsule' },
+        { name: 'Solivo 500mg' },
+        { name: 'Solivo 375mg' },
+        { name: 'Spectazole N Cream' },
+        { name: 'Rovast 5mg' },
+        { name: 'Rovast 10mg' },
+        { name: 'Rovast 20mg' },
+        { name: 'Rosela' },
+        { name: 'Replet' },
+        { name: 'Replet Plus' },
+        { name: 'Ransys 10mg' },
+        { name: 'Ransys 20mg' },
+        { name: 'Ransys 40mg' },
+        { name: 'Ransys AM 20mg' },
+        { name: 'Ransys AM 40mg' },
+        { name: 'Ransys Plus' },
+        { name: 'Prenat-CI' },
+        { name: 'Opal 20mg' },
+        { name: 'Nexovas 5mg' },
+        { name: 'Nexovas 10mg' },
+        { name: 'Myorel 5mg' },
+        { name: 'Myorel 10mg' },
+        { name: 'Lexopil' },
+        { name: 'Isentin M 1000mg' },
+        { name: 'Isentin M 850mg' },
+        { name: 'Flowrap' },
+        { name: 'Evaglip 25mg' },
+        { name: 'Evaglip 10mg' },
+        { name: 'Evania 25mg' },
+        { name: 'Evania 10mg' },
+        { name: 'Evania-M' },
+        { name: 'Dystolic 2.5mg' },
+        { name: 'Dystolic 5mg' },
+        { name: 'Edvila' },
+        { name: 'Edvila-M 500mg' },
+        { name: 'Edvila-M 850mg' },
+        { name: 'Betafix Plus 2.5mg' },
+        { name: 'Betafix Plus 5mg' },
+        { name: 'Acecard 5mg' },
+        { name: 'Acecard 2.5mg' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

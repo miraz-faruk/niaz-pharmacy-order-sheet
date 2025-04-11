@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const Aristopharma = () => {
     const [values, setValues] = useState({});
@@ -7,30 +8,36 @@ const Aristopharma = () => {
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
-        if (!value || /^[1-9]\d*$/.test(value)) {
-            setValues(prevValues => ({
-                ...prevValues,
+        if (value === '' || /^[0-9]\d*$/.test(value)) {
+            setValues(prev => ({
+                ...prev,
                 [itemName]: value
             }));
         }
     };
 
     const handleSelect = (itemName, itemType) => {
-        setSelectedItems(prevItems => {
-            const itemExists = prevItems.find(item => item.name === itemName);
-            if (itemExists) {
-                return prevItems.map(item =>
-                    item.name === itemName ? { ...item, quantity: values[itemName] } : item
-                );
-            } else {
-                return [...prevItems, { name: itemName, type: itemType, quantity: values[itemName] }];
-            }
-        });
+        const quantity = parseInt(values[itemName], 10);
+        if (quantity && quantity > 0) {
+            setSelectedItems(prev => {
+                const existing = prev.find(item => item.name === itemName);
+                const newItem = { name: itemName, type: itemType, quantity };
+                if (existing) {
+                    return prev.map(item =>
+                        item.name === itemName ? newItem : item
+                    );
+                } else {
+                    return [...prev, newItem];
+                }
+            });
+        }
     };
 
+    // 🛠️ Update the quantity safely even when it's temporarily empty
     const handleUpdateSelectedItem = (e, itemName) => {
         const value = e.target.value;
-        if (!value || /^[1-9]\d*$/.test(value)) {
+
+        if (value === '' || /^[0-9]+$/.test(value)) {
             setSelectedItems(prevItems =>
                 prevItems.map(item =>
                     item.name === itemName ? { ...item, quantity: value } : item
@@ -39,52 +46,52 @@ const Aristopharma = () => {
         }
     };
 
+    // 🧾 Generate PDF while filtering out empty or zero-quantity items
     const handleBuyNow = () => {
+        const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
+
+        if (filteredItems.length === 0) {
+            alert("No valid items to generate PDF!");
+            return;
+        }
+
         const doc = new jsPDF();
         let yPosition = 10;
 
-        // Set header
         doc.setFontSize(20);
         doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
 
-        const date = new Date().toLocaleDateString(); // Get current date
+        const date = new Date().toLocaleDateString();
         doc.setFontSize(12);
-        doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
+        doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
 
-        // Add company full name under Niaz Pharmacy and Date
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
-        doc.text("Aristopharma Ltd", 10, yPosition); // Full company name
+        doc.text("Aristopharma", 10, yPosition);
         yPosition += 12;
 
-        // Set column headers
         doc.setFontSize(12);
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
-        doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
+        doc.text("Quantity", 105, yPosition, { align: 'center' });
         yPosition += 5;
-
-        // Draw a line under the header
-        doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
+        doc.line(5, yPosition, 200, yPosition);
         yPosition += 8;
 
-        // Set font for items
         doc.setFont('helvetica', 'normal');
 
-        selectedItems.forEach(item => {
+        filteredItems.forEach(item => {
             doc.text(item.name, 10, yPosition);
-
-            // Calculate position for quantity to be right-aligned
             const quantityWidth = doc.getTextWidth(item.quantity.toString());
-            const quantityX = 105 - quantityWidth; // Right-align the quantity
-            doc.text(item.quantity.toString(), quantityX, yPosition); // Right-aligned quantity
+            const quantityX = 105 - quantityWidth;
+            doc.text(item.quantity.toString(), quantityX, yPosition);
             yPosition += 10;
         });
 
-        doc.save('Aristopharma Ltd.pdf');
+        doc.save('Aristopharma.pdf');
     };
 
     // Sort items alphabetically

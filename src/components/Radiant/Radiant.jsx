@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const Radiant = () => {
     const [values, setValues] = useState({});
@@ -7,30 +8,36 @@ const Radiant = () => {
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
-        if (!value || /^[1-9]\d*$/.test(value)) {
-            setValues(prevValues => ({
-                ...prevValues,
+        if (value === '' || /^[0-9]\d*$/.test(value)) {
+            setValues(prev => ({
+                ...prev,
                 [itemName]: value
             }));
         }
     };
 
     const handleSelect = (itemName, itemType) => {
-        setSelectedItems(prevItems => {
-            const itemExists = prevItems.find(item => item.name === itemName);
-            if (itemExists) {
-                return prevItems.map(item =>
-                    item.name === itemName ? { ...item, quantity: values[itemName] } : item
-                );
-            } else {
-                return [...prevItems, { name: itemName, type: itemType, quantity: values[itemName] }];
-            }
-        });
+        const quantity = parseInt(values[itemName], 10);
+        if (quantity && quantity > 0) {
+            setSelectedItems(prev => {
+                const existing = prev.find(item => item.name === itemName);
+                const newItem = { name: itemName, type: itemType, quantity };
+                if (existing) {
+                    return prev.map(item =>
+                        item.name === itemName ? newItem : item
+                    );
+                } else {
+                    return [...prev, newItem];
+                }
+            });
+        }
     };
 
+    // 🛠️ Update the quantity safely even when it's temporarily empty
     const handleUpdateSelectedItem = (e, itemName) => {
         const value = e.target.value;
-        if (!value || /^[1-9]\d*$/.test(value)) {
+
+        if (value === '' || /^[0-9]+$/.test(value)) {
             setSelectedItems(prevItems =>
                 prevItems.map(item =>
                     item.name === itemName ? { ...item, quantity: value } : item
@@ -39,56 +46,56 @@ const Radiant = () => {
         }
     };
 
-    const handleBuyNow = () => {
-        const doc = new jsPDF();
-        let yPosition = 10;
-
-        // Set header
-        doc.setFontSize(20);
-        doc.setTextColor('Black');
-        doc.text("Niaz Pharmacy", 10, yPosition);
-        yPosition += 10;
-
-        const date = new Date().toLocaleDateString(); // Get current date
-        doc.setFontSize(12);
-        doc.text(`Date: ${date}`, 200, 10, { align: 'right' }); // Add date to PDF header
-
-        // Add company full name under Niaz Pharmacy and Date
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'normal');
-        doc.text("Radiant Pharmaceuticals Limited", 10, yPosition); // Full company name
-        yPosition += 12;
-
-        // Set column headers
-        doc.setFontSize(12);
-        doc.setTextColor('black');
-        doc.setFont('helvetica', 'bold');
-        doc.text("Items Name", 10, yPosition);
-        doc.text("Quantity", 105, yPosition, { align: 'center' }); // Adjust position as needed
-        yPosition += 5;
-
-        // Draw a line under the header
-        doc.line(5, yPosition, 200, yPosition); // Adjust line length if needed
-        yPosition += 8;
-
-        // Set font for items
-        doc.setFont('helvetica', 'normal');
-
-        selectedItems.forEach(item => {
-            doc.text(item.name, 10, yPosition);
-
-            // Calculate position for quantity to be right-aligned
-            const quantityWidth = doc.getTextWidth(item.quantity.toString());
-            const quantityX = 105 - quantityWidth; // Right-align the quantity
-            doc.text(item.quantity.toString(), quantityX, yPosition); // Right-aligned quantity
+    // 🧾 Generate PDF while filtering out empty or zero-quantity items
+        const handleBuyNow = () => {
+            const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
+    
+            if (filteredItems.length === 0) {
+                alert("No valid items to generate PDF!");
+                return;
+            }
+    
+            const doc = new jsPDF();
+            let yPosition = 10;
+    
+            doc.setFontSize(20);
+            doc.setTextColor('Black');
+            doc.text("Niaz Pharmacy", 10, yPosition);
             yPosition += 10;
-        });
-
-        doc.save('Radiant Pharmaceuticals Limited.pdf');
-    };
+    
+            const date = new Date().toLocaleDateString();
+            doc.setFontSize(12);
+            doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
+    
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'normal');
+            doc.text("Radiant Pharmaceuticals", 10, yPosition);
+            yPosition += 12;
+    
+            doc.setFontSize(12);
+            doc.setTextColor('black');
+            doc.setFont('helvetica', 'bold');
+            doc.text("Items Name", 10, yPosition);
+            doc.text("Quantity", 105, yPosition, { align: 'center' });
+            yPosition += 5;
+            doc.line(5, yPosition, 200, yPosition);
+            yPosition += 8;
+    
+            doc.setFont('helvetica', 'normal');
+    
+            filteredItems.forEach(item => {
+                doc.text(item.name, 10, yPosition);
+                const quantityWidth = doc.getTextWidth(item.quantity.toString());
+                const quantityX = 105 - quantityWidth;
+                doc.text(item.quantity.toString(), quantityX, yPosition);
+                yPosition += 10;
+            });
+    
+            doc.save('Radiant Pharmaceuticals.pdf');
+        };
 
     const items = [
-        { name: 'Acos Tab 500mg' },
+        { name: 'Acos 500mg Tab' },
         { name: 'Acteria 4 billion' },
         { name: 'ATOZ Premium Tab' },
         { name: 'ATOZ Senior Tab' },
@@ -146,7 +153,23 @@ const Radiant = () => {
         { name: 'Naprosyn Tab 500mg' },
         { name: 'Naprosyn-Plus Tab 375mg' },
         { name: 'Naprosyn-Plus Tab 500mg' },
-        { name: 'Neucos-B Tab' }
+        { name: 'Neucos-B Tab' },
+
+        { name: 'Prelica CR 82.5 Tab' },
+        { name: 'Acos Syrup' },
+        { name: 'Alkalna 600 Tab' },
+        { name: 'Carlina 5 Tab' },
+        { name: 'Carlina M 2.5/500 Tab' },
+        { name: 'Triginal MR Tab' },
+        { name: 'Radiglip-M 500mg Tab' },
+        { name: 'Radiglip-M 1000mg Tab' },
+        { name: 'Minista Tab' },
+        { name: 'Lizid 400mg Tab' },
+        { name: 'Lizid 600mg Tab' },
+        { name: 'Frenvas 20mg Tab' },
+        { name: 'Gavirad Tab' },
+        { name: 'Duovas 40mg Tab' },
+        { name: 'Duovas 20mg Tab' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
