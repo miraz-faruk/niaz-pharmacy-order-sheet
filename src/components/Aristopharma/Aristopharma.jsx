@@ -48,6 +48,7 @@ const Aristopharma = () => {
 
 
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
+    // 🧾 Generate PDF while filtering out empty or zero-quantity items
     const handleBuyNow = () => {
         const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
 
@@ -58,6 +59,7 @@ const Aristopharma = () => {
 
         const doc = new jsPDF();
         let yPosition = 10;
+        const pageHeight = doc.internal.pageSize.height;
 
         doc.setFontSize(20);
         doc.setTextColor('Black');
@@ -70,7 +72,7 @@ const Aristopharma = () => {
 
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
-        doc.text("Aristopharma", 10, yPosition);
+        doc.text("Aristopharma Ltd.", 10, yPosition);
         yPosition += 12;
 
         doc.setFontSize(12);
@@ -85,6 +87,21 @@ const Aristopharma = () => {
         doc.setFont('helvetica', 'normal');
 
         filteredItems.forEach(item => {
+            if (yPosition > pageHeight - 20) {
+                doc.addPage();
+                yPosition = 10;
+
+                // Add header on new page
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text("Items Name", 10, yPosition);
+                doc.text("Quantity", 105, yPosition, { align: 'center' });
+                yPosition += 5;
+                doc.line(5, yPosition, 200, yPosition);
+                yPosition += 8;
+                doc.setFont('helvetica', 'normal');
+            }
+
             doc.text(item.name, 10, yPosition);
             const quantityWidth = doc.getTextWidth(item.quantity.toString());
             const quantityX = 105 - quantityWidth;
@@ -92,7 +109,7 @@ const Aristopharma = () => {
             yPosition += 10;
         });
 
-        doc.save('Aristopharma.pdf');
+        doc.save(`Aristopharma-${activeTab.toLowerCase()}.pdf`);
     };
 
     // Cardiac items
@@ -300,78 +317,78 @@ const Aristopharma = () => {
         { name: 'Xpa XR Tab 665mg' },
         { name: 'ZnF Tab 5mg' },
         { name: 'Zofen Tab 0.5mg' },
-      ].sort((a, b) => a.name.localeCompare(b.name));
+    ].sort((a, b) => a.name.localeCompare(b.name));
 
-      const currentItems = activeTab === 'Cardiac' ? cardiacItems : generalItems;
+    const currentItems = activeTab === 'Cardiac' ? cardiacItems : generalItems;
 
-      return (
-          <div className='mx-3'>
-              {/* Tabs */}
-              <div className='flex gap-3 my-4'>
-                  <button
-                      className={`btn ${activeTab === 'Cardiac' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-                      onClick={() => setActiveTab('Cardiac')}
-                  >
-                      Cardiac
-                  </button>
-                  <button
-                      className={`btn ${activeTab === 'General' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-                      onClick={() => setActiveTab('General')}
-                  >
-                      General
-                  </button>
-              </div>
-  
-              <h2 className='text-lg font-medium'>{activeTab} Items</h2>
-              <div className='my-2'>
-                  <hr />
-              </div>
-  
-              <div>
-                  {currentItems.map(item => (
-                      <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
-                          <p className='col-span-2'>{item.name}</p>
-                          <input
-                              className='border border-green-200 text-center py-3 px-2 rounded-lg'
-                              type="number"
-                              value={values[item.name] || ''}
-                              onChange={(e) => handleChange(e, item.name)}
-                              min="1"
-                          />
-                          <button
-                              className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
-                              disabled={!values[item.name]}
-                              onClick={() => handleSelect(item.name, activeTab)}
-                          >
-                              Select
-                          </button>
-                      </div>
-                  ))}
-              </div>
-  
-              <div className='mt-10'>
-                  <hr />
-                  <h2>Selected Items here:</h2>
-                  <ul>
-                      {selectedItems.map((item, index) => (
-                          <li key={index} className='grid grid-cols-4 items-center gap-2'>
-                              <p className='col-span-2'>{item.name} <small>{item.type}</small></p>
-                              <input
-                                  className='border border-green-200 py-3 px-2 rounded-lg text-center'
-                                  type="number"
-                                  value={item.quantity}
-                                  onChange={(e) => handleUpdateSelectedItem(e, item.name)}
-                                  min="1"
-                              />
-                          </li>
-                      ))}
-                  </ul>
-                  <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
-                      Generate Order Sheet
-                  </button>
-              </div>
-          </div>
-      );
-  };
-  
-  export default Aristopharma;
+    return (
+        <div className='mx-3'>
+            {/* Tabs */}
+            <div className='flex gap-3 my-4'>
+                <button
+                    className={`btn ${activeTab === 'Cardiac' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('Cardiac')}
+                >
+                    Cardiac
+                </button>
+                <button
+                    className={`btn ${activeTab === 'General' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('General')}
+                >
+                    General
+                </button>
+            </div>
+
+            <h2 className='text-lg font-medium'>{activeTab} Items</h2>
+            <div className='my-2'>
+                <hr />
+            </div>
+
+            <div>
+                {currentItems.map(item => (
+                    <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
+                        <p className='col-span-2'>{item.name}</p>
+                        <input
+                            className='border border-green-200 text-center py-3 px-2 rounded-lg'
+                            type="number"
+                            value={values[item.name] || ''}
+                            onChange={(e) => handleChange(e, item.name)}
+                            min="1"
+                        />
+                        <button
+                            className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
+                            disabled={!values[item.name]}
+                            onClick={() => handleSelect(item.name, activeTab)}
+                        >
+                            Select
+                        </button>
+                    </div>
+                ))}
+            </div>
+
+            <div className='mt-10'>
+                <hr />
+                <h2>Selected Items here:</h2>
+                <ul>
+                    {selectedItems.map((item, index) => (
+                        <li key={index} className='grid grid-cols-4 items-center gap-2'>
+                            <p className='col-span-2'>{item.name}</p>
+                            <input
+                                className='border border-green-200 py-3 px-2 rounded-lg text-center'
+                                type="number"
+                                value={item.quantity}
+                                onChange={(e) => handleUpdateSelectedItem(e, item.name)}
+                                min="1"
+                            />
+                        </li>
+                    ))}
+                </ul>
+                <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
+                    Generate Order Sheet
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default Aristopharma;

@@ -47,52 +47,68 @@ const Radiant = () => {
     };
 
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
-        const handleBuyNow = () => {
-            const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
+    const handleBuyNow = () => {
+        const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
     
-            if (filteredItems.length === 0) {
-                alert("No valid items to generate PDF!");
-                return;
+        if (filteredItems.length === 0) {
+            alert("No valid items to generate PDF!");
+            return;
+        }
+    
+        const doc = new jsPDF();
+        let yPosition = 10;
+        const pageHeight = doc.internal.pageSize.height;
+    
+        doc.setFontSize(20);
+        doc.setTextColor('Black');
+        doc.text("Niaz Pharmacy", 10, yPosition);
+        yPosition += 10;
+    
+        const date = new Date().toLocaleDateString();
+        doc.setFontSize(12);
+        doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
+    
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text("Radiant Pharmaceuticals Ltd.", 10, yPosition);
+        yPosition += 12;
+    
+        doc.setFontSize(12);
+        doc.setTextColor('black');
+        doc.setFont('helvetica', 'bold');
+        doc.text("Items Name", 10, yPosition);
+        doc.text("Quantity", 105, yPosition, { align: 'center' });
+        yPosition += 5;
+        doc.line(5, yPosition, 200, yPosition);
+        yPosition += 8;
+    
+        doc.setFont('helvetica', 'normal');
+    
+        filteredItems.forEach(item => {
+            if (yPosition > pageHeight - 20) {
+                doc.addPage();
+                yPosition = 10;
+    
+                // Add header on new page
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text("Items Name", 10, yPosition);
+                doc.text("Quantity", 105, yPosition, { align: 'center' });
+                yPosition += 5;
+                doc.line(5, yPosition, 200, yPosition);
+                yPosition += 8;
+                doc.setFont('helvetica', 'normal');
             }
     
-            const doc = new jsPDF();
-            let yPosition = 10;
-    
-            doc.setFontSize(20);
-            doc.setTextColor('Black');
-            doc.text("Niaz Pharmacy", 10, yPosition);
+            doc.text(item.name, 10, yPosition);
+            const quantityWidth = doc.getTextWidth(item.quantity.toString());
+            const quantityX = 105 - quantityWidth;
+            doc.text(item.quantity.toString(), quantityX, yPosition);
             yPosition += 10;
+        });
     
-            const date = new Date().toLocaleDateString();
-            doc.setFontSize(12);
-            doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
-    
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'normal');
-            doc.text("Radiant Pharmaceuticals", 10, yPosition);
-            yPosition += 12;
-    
-            doc.setFontSize(12);
-            doc.setTextColor('black');
-            doc.setFont('helvetica', 'bold');
-            doc.text("Items Name", 10, yPosition);
-            doc.text("Quantity", 105, yPosition, { align: 'center' });
-            yPosition += 5;
-            doc.line(5, yPosition, 200, yPosition);
-            yPosition += 8;
-    
-            doc.setFont('helvetica', 'normal');
-    
-            filteredItems.forEach(item => {
-                doc.text(item.name, 10, yPosition);
-                const quantityWidth = doc.getTextWidth(item.quantity.toString());
-                const quantityX = 105 - quantityWidth;
-                doc.text(item.quantity.toString(), quantityX, yPosition);
-                yPosition += 10;
-            });
-    
-            doc.save('Radiant Pharmaceuticals.pdf');
-        };
+        doc.save('Radiant Pharmaceuticals.pdf');
+    };
 
     const items = [
         { name: 'Acos 500mg Tab' },
