@@ -7,6 +7,8 @@ import Nuvista from '../Nuvista/Nuvista';
 import Renata from '../Renata/Renata';
 import DrugInternational from '../DrugInternational/DrugInternational';
 import Beximco from '../Beximco/Beximco';
+import Delta from '../Delta/Delta';
+import Synovia from '../Synovia/Synovia';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -30,6 +32,12 @@ const Home = () => {
                     onClick={() => handleCompanySelect('Beximco')}
                 >
                     Beximco
+                </button>
+                <button
+                    className="btn bg-amber-400 text-white mx-2"
+                    onClick={() => handleCompanySelect('Delta')}
+                >
+                    Delta Pharma
                 </button>
                 <button
                     className="btn bg-orange-500 text-white mx-2"
@@ -61,17 +69,25 @@ const Home = () => {
                 >
                     Renata
                 </button>
+                <button
+                    className="btn bg-lime-600 text-white mx-2"
+                    onClick={() => handleCompanySelect('Synovia')}
+                >
+                    Synovia Pharma
+                </button>
             </div>
 
             {/* Conditionally render the selected company's products */}
             <div className="product-list my-5">
                 {selectedCompany === 'Aristopharma' && <Aristopharma />}
                 {selectedCompany === 'Beximco' && <Beximco></Beximco>}
+                {selectedCompany === 'Delta' && <Delta></Delta>}
                 {selectedCompany === 'DrugInternational' && <DrugInternational></DrugInternational>}
                 {selectedCompany === 'Healthcare' && <Healthcare />}
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
                 {selectedCompany === 'Radiant' && <Radiant />}
                 {selectedCompany === 'Renata' && <Renata></Renata>}
+                {selectedCompany === 'Synovia' && <Synovia></Synovia>}
             </div>
         </div>
     );
