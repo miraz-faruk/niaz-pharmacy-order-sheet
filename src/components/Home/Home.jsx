@@ -9,6 +9,7 @@ import DrugInternational from '../DrugInternational/DrugInternational';
 import Beximco from '../Beximco/Beximco';
 import Delta from '../Delta/Delta';
 import Synovia from '../Synovia/Synovia';
+import Eskayef from '../Eskayef/Eskayef';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -44,6 +45,12 @@ const Home = () => {
                     onClick={() => handleCompanySelect('DrugInternational')}
                 >
                     Drug International
+                </button>
+                <button
+                    className="btn bg-rose-500 text-white mx-2"
+                    onClick={() => handleCompanySelect('Eskayef')}
+                >
+                    Eskayef
                 </button>
                 <button
                     className="btn bg-pink-700 text-white mx-2"
@@ -83,6 +90,7 @@ const Home = () => {
                 {selectedCompany === 'Beximco' && <Beximco></Beximco>}
                 {selectedCompany === 'Delta' && <Delta></Delta>}
                 {selectedCompany === 'DrugInternational' && <DrugInternational></DrugInternational>}
+                {selectedCompany === 'Eskayef' && <Eskayef></Eskayef>}
                 {selectedCompany === 'Healthcare' && <Healthcare />}
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
                 {selectedCompany === 'Radiant' && <Radiant />}
