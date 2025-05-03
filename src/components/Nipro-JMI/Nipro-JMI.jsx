@@ -2,7 +2,7 @@ import { useState } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const Delta = () => {
+const NiproJMI = () => {
     const [values, setValues] = useState({});
     const [selectedItems, setSelectedItems] = useState([]);
 
@@ -59,21 +59,21 @@ const Delta = () => {
         let yPosition = 10;
         const pageHeight = doc.internal.pageSize.height;
 
-        doc.setFontSize(26);
+        doc.setFontSize(20);
         doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
 
         const date = new Date().toLocaleDateString();
-        doc.setFontSize(16);
+        doc.setFontSize(12);
         doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
 
-        doc.setFontSize(16);
+        doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
-        doc.text("Delta Pharma Ltd", 10, yPosition);
+        doc.text("Nipro JMI Pharmaceuticals Ltd", 10, yPosition);
         yPosition += 12;
 
-        doc.setFontSize(16);
+        doc.setFontSize(12);
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
         doc.text("Items Name", 10, yPosition);
@@ -90,7 +90,7 @@ const Delta = () => {
                 yPosition = 10;
 
                 // Add header on new page
-                doc.setFontSize(16);
+                doc.setFontSize(12);
                 doc.setFont('helvetica', 'bold');
                 doc.text("Items Name", 10, yPosition);
                 doc.text("Quantity", 105, yPosition, { align: 'center' });
@@ -112,52 +112,41 @@ const Delta = () => {
 
     // Sort items alphabetically
     const items = [
-        { name: 'Anin Tab 50 mg' },
-        { name: 'Anin Plus Tab 50 mg' },
-        { name: 'ATV Tab 20 mg' },
-        { name: 'ATV Tab 10 mg' },
-        { name: 'Baricit Tab 2 mg' },
-        { name: 'Boni D Tab 500 mg' },
-        { name: 'CTZ Tab 10 mg' },
-        { name: 'Degut Tab 10 mg' },
-        { name: 'Delfex Tab 120 mg' },
-        { name: 'Delfex Tab 180 mg' },
-        { name: 'Demovo Tab 500 mg' },
-        { name: 'Demovo Tab 375 mg' },
-        { name: 'Dermafin Tab 250 mg' },
-        { name: 'Ebatrol Tab 10 mg' },
-        { name: 'Empazin Tab 10 mg' },
-        { name: 'Empazin Tab 25 mg' },
-        { name: 'Empazin L Tab 25 mg' },
-        { name: 'Empazin L Tab 10 mg' },
-        { name: 'Empazin M Tab 1000 mg' },
-        { name: 'Empazin M Tab 500 mg' },
-        { name: 'Eto Tab 90 mg' },
-        { name: 'Eto Tab 60 mg' },
-        { name: 'Eto Tab 120 mg' },
-        { name: 'iMAX Cap 20 mg' },
-        { name: 'Linatin Tab 5 mg' },
-        { name: 'Linatin M Tab 500 mg' },
-        { name: 'Linatin M Tab 850 mg' },
-        { name: 'Linatin M Tab 1000 mg' },
-        { name: 'Lonapam Tab 0.5 mg' },
-        { name: 'Lonapam Tab 2 mg' },
-        { name: 'Lonapam Tab 1 mg' },
-        { name: 'Methotrax Tab 10 mg' },
-        { name: 'Montela Tab 10 mg' },
-        { name: 'Pelican Tab 20 mg' },
-        { name: 'Pyrenol Tab 500 mg' },
-        { name: 'RTV Tab 5 mg' },
-        { name: 'RTV Tab 10 mg' },
-        { name: 'RTV Tab 20 mg' },
-        { name: 'Scabo Tab 6 mg' },
-        { name: 'Scabo Tab 12 mg' },
-        { name: 'Stimo Tab 10 mg' },
-        { name: 'Sun D Cap 20000 IU' },
-        { name: 'Sun D Cap 40000 IU' },
-        { name: 'Tofacit Tab 5 mg' },
-        { name: 'Tofacit XR Tab 11 mg' },
-        { name: 'Voricare Tab 200 mg' }
+        { name: 'Avamist Nasal Spray' },
+        { name: 'Bilfast Oral Solution 40 ml' },
+        { name: 'Bilfast Tablet 20 mg' },
+        { name: 'Calgi-D Tablet 500 mg+200 IU' },
+        { name: 'Calgi-DX Tablet 600 mg+400 IU' },
+        { name: 'Diazid Tablet 80 mg' },
+        { name: 'Diazid MR Tablet 60 mg' },
+        { name: 'Diazid MR Tablet 30 mg' },
+        { name: 'Doxiva Syrup 100 ml' },
+        { name: 'Doxiva Tablet 200 mg' },
+        { name: 'Doxiva Tablet 400 mg' },
+        { name: 'Emjenta Tablet 10 mg+5 mg' },
+        { name: 'Emjenta Tablet 25 mg+5 mg' },
+        { name: 'Empa Tablet 10 mg' },
+        { name: 'Empa Tablet 25 mg' },
+        { name: 'EmpaMet Tablet 5 mg+500 mg' },
+        { name: 'EmpaMet Tablet 12.5 mg+1000 mg' },
+        { name: 'EmpaMet Tablet 12.5 mg+850 mg' },
+        { name: 'EmpaMet Tablet 5 mg+1000 mg' },
+        { name: 'EmpaMet Tablet 12.5 mg+500 mg' },
+        { name: 'Lijenta Tablet 5 mg' },
+        { name: 'Lijenta-M Tablet 500 mg' },
+        { name: 'Lijenta-M Tablet 850 mg' },
+        { name: 'Lijenta-M Tablet 1000 mg' },
+        { name: 'Losarva Tablet 50 mg' },
+        { name: 'Lyrinex Capsule 50 mg' },
+        { name: 'Lyrinex Capsule 75 mg' },
+        { name: 'Lyrinex CR Tablet 82.5 mg' },
+        { name: 'Montiva Tablet 10 mg' },
+        { name: 'Pandura Tablet 0.5 mg' },
+        { name: 'Pandura Tablet 1 mg' },
+        { name: 'Pandura Tablet 2 mg' },
+        { name: 'Rablet Tablet 20 mg' },
+        { name: 'Starcal D Tablet' },
+        { name: 'V3N Tablet' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
@@ -211,4 +200,4 @@ const Delta = () => {
     );
 };
 
-export default Delta;
+export default NiproJMI;

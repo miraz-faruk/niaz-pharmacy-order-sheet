@@ -10,6 +10,7 @@ import Beximco from '../Beximco/Beximco';
 import Delta from '../Delta/Delta';
 import Synovia from '../Synovia/Synovia';
 import Eskayef from '../Eskayef/Eskayef';
+import NiproJMI from '../Nipro-JMI/Nipro-JMI';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -59,6 +60,12 @@ const Home = () => {
                     Healthcare
                 </button>
                 <button
+                    className="btn bg-teal-500 text-white mx-2"
+                    onClick={() => handleCompanySelect('NiproJMI')}
+                >
+                    NIPRO JMI
+                </button>
+                <button
                     className="btn bg-purple-700 text-white mx-2"
                     onClick={() => handleCompanySelect('Nuvista')}
                 >
@@ -92,6 +99,7 @@ const Home = () => {
                 {selectedCompany === 'DrugInternational' && <DrugInternational></DrugInternational>}
                 {selectedCompany === 'Eskayef' && <Eskayef></Eskayef>}
                 {selectedCompany === 'Healthcare' && <Healthcare />}
+                {selectedCompany === 'NiproJMI' && <NiproJMI></NiproJMI>}
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
                 {selectedCompany === 'Radiant' && <Radiant />}
                 {selectedCompany === 'Renata' && <Renata></Renata>}

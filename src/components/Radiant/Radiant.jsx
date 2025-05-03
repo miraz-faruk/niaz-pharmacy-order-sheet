@@ -113,6 +113,7 @@ const Radiant = () => {
     const items = [
         { name: 'Acos 500mg Tab' },
         { name: 'Acteria 4 billion' },
+        { name: 'Acteria Kids' },
         { name: 'ATOZ Premium Tab' },
         { name: 'ATOZ Senior Tab' },
         { name: 'Avenac Tab 100mg' },
@@ -130,7 +131,6 @@ const Radiant = () => {
         { name: 'Fastel Tab 120mg' },
         { name: 'Fastel Tab 180mg' },
         { name: 'Feeliz Tab 12.5mg' },
-
         { name: 'Carticare Tab' },
         { name: 'Carticare Max Tab 750mg' },
         { name: 'Carticare TS Tab' },
@@ -147,13 +147,11 @@ const Radiant = () => {
         { name: 'Prompton Cap 20mg' },
         { name: 'Raditil Tab 20mg' },
         { name: 'Raditrol Cap 0.25mcg' },
-
         { name: 'Vono EC Tab 10mg' },
         { name: 'Vono EC Tab 20mg' },
         { name: 'Xyflo Tab 4mg' },
         { name: 'Xyflo Tab 5mg' },
         { name: 'Xyflo Tab 10mg' },
-
         { name: 'Rivotril Tab 0.25mg' },
         { name: 'Rivotril Tab 0.5mg' },
         { name: 'Rivotril Tab 1mg' },
@@ -163,14 +161,12 @@ const Radiant = () => {
         { name: 'Rofuclav Tab 250mg' },
         { name: 'Rofuclav Tab 500mg' },
         { name: 'Toradolin Tab 10mg' },
-
         { name: 'Naprosyn DPS 125mg' },
         { name: 'Naprosyn Tab 250mg' },
         { name: 'Naprosyn Tab 500mg' },
         { name: 'Naprosyn-Plus Tab 375mg' },
         { name: 'Naprosyn-Plus Tab 500mg' },
         { name: 'Neucos-B Tab' },
-
         { name: 'Prelica CR 82.5 Tab' },
         { name: 'Acos Syp' },
         { name: 'Alkalna 600 Tab' },
