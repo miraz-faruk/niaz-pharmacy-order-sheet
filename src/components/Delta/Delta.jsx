@@ -69,7 +69,7 @@ const Delta = () => {
         doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
 
         doc.setFontSize(16);
-        doc.setFont('helvetica', 'normal');
+        doc.setFont('helvetica', 'bold');
         doc.text("Delta Pharma Ltd", 10, yPosition);
         yPosition += 12;
 
@@ -82,7 +82,7 @@ const Delta = () => {
         doc.line(5, yPosition, 200, yPosition);
         yPosition += 8;
 
-        doc.setFont('helvetica', 'normal');
+        doc.setFont('helvetica', 'semi-bold');
 
         filteredItems.forEach(item => {
             if (yPosition > pageHeight - 20) {
@@ -97,7 +97,7 @@ const Delta = () => {
                 yPosition += 5;
                 doc.line(5, yPosition, 200, yPosition);
                 yPosition += 8;
-                doc.setFont('helvetica', 'normal');
+                doc.setFont('helvetica', 'semi-bold');
             }
 
             doc.text(item.name, 10, yPosition);
