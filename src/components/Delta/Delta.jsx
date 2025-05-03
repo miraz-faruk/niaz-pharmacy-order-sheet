@@ -47,6 +47,68 @@ const Delta = () => {
     };
 
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
+    // const handleBuyNow = () => {
+    //     const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
+
+    //     if (filteredItems.length === 0) {
+    //         alert("No valid items to generate PDF!");
+    //         return;
+    //     }
+
+    //     const doc = new jsPDF();
+    //     let yPosition = 10;
+    //     const pageHeight = doc.internal.pageSize.height;
+
+    //     doc.setFontSize(26);
+    //     doc.setTextColor('Black');
+    //     doc.text("Niaz Pharmacy", 10, yPosition);
+    //     yPosition += 10;
+
+    //     const date = new Date().toLocaleDateString();
+    //     doc.setFontSize(16);
+    //     doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
+
+    //     doc.setFontSize(16);
+    //     doc.setFont('helvetica', 'bold');
+    //     doc.text("Delta Pharma Ltd", 10, yPosition);
+    //     yPosition += 12;
+
+    //     doc.setFontSize(16);
+    //     doc.setTextColor('black');
+    //     doc.setFont('helvetica', 'bold');
+    //     doc.text("Items Name", 10, yPosition);
+    //     doc.text("Quantity", 105, yPosition, { align: 'center' });
+    //     yPosition += 5;
+    //     doc.line(5, yPosition, 200, yPosition);
+    //     yPosition += 8;
+
+    //     doc.setFont('helvetica', 'bold');
+
+    //     filteredItems.forEach(item => {
+    //         if (yPosition > pageHeight - 20) {
+    //             doc.addPage();
+    //             yPosition = 10;
+
+    //             // Add header on new page
+    //             doc.setFontSize(16);
+    //             doc.setFont('helvetica', 'normal');
+    //             doc.text("Items Name", 10, yPosition);
+    //             doc.text("Quantity", 105, yPosition, { align: 'center' });
+    //             yPosition += 5;
+    //             doc.line(5, yPosition, 200, yPosition);
+    //             yPosition += 8;
+    //             doc.setFont('helvetica', 'normal');
+    //         }
+
+    //         doc.text(item.name, 10, yPosition);
+    //         const quantityWidth = doc.getTextWidth(item.quantity.toString());
+    //         const quantityX = 105 - quantityWidth;
+    //         doc.text(item.quantity.toString(), quantityX, yPosition);
+    //         yPosition += 10;
+    //     });
+
+    //     doc.save('Delta Pharma.pdf');
+    // };
     const handleBuyNow = () => {
         const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
 
@@ -55,56 +117,58 @@ const Delta = () => {
             return;
         }
 
-        const doc = new jsPDF();
-        let yPosition = 10;
-        const pageHeight = doc.internal.pageSize.height;
+        const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: [80, 300] // Mobile-style receipt format
+        });
 
-        doc.setFontSize(26);
-        doc.setTextColor('Black');
-        doc.text("Niaz Pharmacy", 10, yPosition);
+        let yPosition = 10;
+        const pageHeight = 300;
+
+        doc.setFontSize(20);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor('black');
+        doc.text("Niaz Pharmacy", 5, yPosition); // ⬅️ Reduced margin
         yPosition += 10;
 
         const date = new Date().toLocaleDateString();
-        doc.setFontSize(16);
-        doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Date: ${date}`, 5, yPosition);
+        yPosition += 10;
 
         doc.setFontSize(16);
         doc.setFont('helvetica', 'bold');
-        doc.text("Delta Pharma Ltd", 10, yPosition);
-        yPosition += 12;
+        doc.text("Delta Pharma Ltd", 5, yPosition);
+        yPosition += 10;
 
-        doc.setFontSize(16);
-        doc.setTextColor('black');
-        doc.setFont('helvetica', 'bold');
-        doc.text("Items Name", 10, yPosition);
-        doc.text("Quantity", 105, yPosition, { align: 'center' });
+        doc.setFontSize(14);
+        doc.text("Item", 5, yPosition);
+        doc.text("Qty", 70, yPosition); // ⬅️ Moved right for spacing
         yPosition += 5;
-        doc.line(5, yPosition, 200, yPosition);
-        yPosition += 8;
+        doc.line(3, yPosition, 77, yPosition);
+        yPosition += 5;
 
-        doc.setFont('helvetica', 'semi-bold');
+        doc.setFontSize(13);
+        doc.setFont('helvetica', 'bold');
 
         filteredItems.forEach(item => {
             if (yPosition > pageHeight - 20) {
                 doc.addPage();
                 yPosition = 10;
 
-                // Add header on new page
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                doc.text("Items Name", 10, yPosition);
-                doc.text("Quantity", 105, yPosition, { align: 'center' });
+                doc.setFontSize(14);
+                doc.text("Item", 5, yPosition);
+                doc.text("Qty", 70, yPosition);
                 yPosition += 5;
-                doc.line(5, yPosition, 200, yPosition);
-                yPosition += 8;
-                doc.setFont('helvetica', 'semi-bold');
+                doc.line(3, yPosition, 77, yPosition);
+                yPosition += 5;
             }
 
-            doc.text(item.name, 10, yPosition);
-            const quantityWidth = doc.getTextWidth(item.quantity.toString());
-            const quantityX = 105 - quantityWidth;
-            doc.text(item.quantity.toString(), quantityX, yPosition);
-            yPosition += 10;
+            doc.text(item.name, 5, yPosition);
+            doc.text(item.quantity.toString(), 70, yPosition);
+            yPosition += 8;
         });
 
         doc.save('Delta Pharma.pdf');
