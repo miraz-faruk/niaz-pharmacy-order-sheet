@@ -11,6 +11,7 @@ import Delta from '../Delta/Delta';
 import Synovia from '../Synovia/Synovia';
 import Eskayef from '../Eskayef/Eskayef';
 import NiproJMI from '../Nipro-JMI/Nipro-JMI';
+import Square from '../Square/Square';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -84,6 +85,12 @@ const Home = () => {
                     Renata
                 </button>
                 <button
+                    className="btn bg-cyan-400 text-white mx-2"
+                    onClick={() => handleCompanySelect('Square')}
+                >
+                    Square
+                </button>
+                <button
                     className="btn bg-lime-600 text-white mx-2"
                     onClick={() => handleCompanySelect('Synovia')}
                 >
@@ -103,6 +110,7 @@ const Home = () => {
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
                 {selectedCompany === 'Radiant' && <Radiant />}
                 {selectedCompany === 'Renata' && <Renata></Renata>}
+                {selectedCompany === 'Square' && <Square></Square>}
                 {selectedCompany === 'Synovia' && <Synovia></Synovia>}
             </div>
         </div>
