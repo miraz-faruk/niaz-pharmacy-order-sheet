@@ -120,7 +120,7 @@ const NiproJMI = () => {
         { name: 'Diazid Tablet 80 mg' },
         { name: 'Diazid MR Tablet 60 mg' },
         { name: 'Diazid MR Tablet 30 mg' },
-        { name: 'Doxiva Syrup 100 ml' },
+        { name: 'Doxiva Syp 100 ml' },
         { name: 'Doxiva Tablet 200 mg' },
         { name: 'Doxiva Tablet 400 mg' },
         { name: 'Emjenta Tablet 10 mg+5 mg' },

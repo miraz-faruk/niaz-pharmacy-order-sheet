@@ -285,7 +285,7 @@ const Eskayef = () => {
         { name: 'Ostocal DX Tab 600 mg' },
         { name: 'Ostocal G Tab 500 mg' },
         { name: 'Ostocal GX Tab 600 mg' },
-        { name: 'Ostocal JR Chewable Tab 250 mg' },
+        { name: 'Ostocal JR Tab 250 mg' },
         { name: 'Ostocal M Tab' },
         { name: 'Ostocal Vita Tab' },
         { name: 'Paino Tab 100 mg' },

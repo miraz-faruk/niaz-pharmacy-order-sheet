@@ -199,7 +199,7 @@ const Delta = () => {
         { name: 'Eto Tab 90 mg' },
         { name: 'Eto Tab 60 mg' },
         { name: 'Eto Tab 120 mg' },
-        { name: 'iMAX Cap 20 mg' },
+        { name: 'Imax Cap 20 mg' },
         { name: 'Linatin Tab 5 mg' },
         { name: 'Linatin M Tab 500 mg' },
         { name: 'Linatin M Tab 850 mg' },
