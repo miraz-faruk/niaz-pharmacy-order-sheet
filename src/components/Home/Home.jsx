@@ -12,6 +12,7 @@ import Synovia from '../Synovia/Synovia';
 import Eskayef from '../Eskayef/Eskayef';
 import NiproJMI from '../Nipro-JMI/Nipro-JMI';
 import Square from '../Square/Square';
+import ACME from '../ACME/ACME';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -24,6 +25,12 @@ const Home = () => {
         <div>
             <Banner />
             <div className="button-container text-center my-5 grid grid-cols-3 gap-3">
+                <button
+                    className="btn bg-cyan-500 text-white mx-2"
+                    onClick={() => handleCompanySelect('ACME')}
+                >
+                    ACME
+                </button>
                 <button
                     className="btn bg-blue-500 text-white mx-2"
                     onClick={() => handleCompanySelect('Aristopharma')}
@@ -100,6 +107,7 @@ const Home = () => {
 
             {/* Conditionally render the selected company's products */}
             <div className="product-list my-5">
+                {selectedCompany === 'ACME' && <ACME></ACME>}
                 {selectedCompany === 'Aristopharma' && <Aristopharma />}
                 {selectedCompany === 'Beximco' && <Beximco></Beximco>}
                 {selectedCompany === 'Delta' && <Delta></Delta>}

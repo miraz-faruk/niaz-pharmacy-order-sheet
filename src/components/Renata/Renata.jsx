@@ -329,7 +329,14 @@ const Healthcare = () => {
         { name: 'Zithrin Tab 500mg' },
         { name: 'Zodef Suspension 60 ml' },
         { name: 'Zodef Tab 24mg' },
-        { name: 'Zodef Tab 6mg' }
+        { name: 'Zodef Tab 6mg' },
+        { name: "Azisan Tablet 40 mg" },
+        { name: "Lactohil Powder" },
+        { name: "Pregcare" },
+        { name: "Nutrilina" },
+        { name: "GoodGut" },
+        { name: "JeeBee" },
+        { name: "Espirar" }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
