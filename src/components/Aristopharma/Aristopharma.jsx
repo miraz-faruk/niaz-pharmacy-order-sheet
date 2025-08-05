@@ -46,7 +46,6 @@ const Aristopharma = () => {
         }
     };
 
-
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
     const handleBuyNow = () => {

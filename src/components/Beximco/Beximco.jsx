@@ -170,8 +170,10 @@ const Beximco = () => {
         { name: 'Billi Tab 20 mg' },
         { name: 'Billi Oral Solution' },
         { name: 'Billi Meltab Tab 10 mg' },
-        { name: 'Bizoran Tab 40 mg' },
-        { name: 'Bizoran Tab 20 mg' },
+        { name: 'Bizoran Tab 5/40 mg' },
+        { name: 'Bizoran Tab 5/20 mg' },
+        { name: 'Bizoran Tab 10/20 mg' },
+        { name: 'Bizoran Tab 10/40 mg' },
         { name: 'Bronkolax Syp' },
         { name: 'Buflex Tab 500 mg' },
         { name: 'Buflex Tab 1000 mg' },
@@ -310,7 +312,7 @@ const Beximco = () => {
         { name: 'Neodrop Pediatric Drop' },
         { name: 'Neofloxin Eye Drop' },
         { name: 'Neofloxin Tab 500 mg' },
-        { name: 'Neofloxin Suspension 250 mg' },
+        { name: 'Neofloxin Suspension' },
         { name: 'Neofloxin-D Eye Drop' },
         { name: 'Neopem Tab 150 mg' },
         { name: 'Neopem Tab 200 mg' },
@@ -415,7 +417,7 @@ const Beximco = () => {
         { name: 'Tycil Cap 250 mg' },
         { name: 'Tycil Cap 500 mg' },
         { name: 'Tycil Suspension 125 mg' },
-        { name: 'Tyclav Suspension (125 mg+31.25 mg)' },
+        { name: 'Tyclav Suspension' },
         { name: 'Tyclav Tab 1000 mg' },
         { name: 'Tyclav Tab 375 mg' },
         { name: 'Tyclav Tab 625 mg' },
@@ -445,7 +447,9 @@ const Beximco = () => {
         { name: 'Zolax Tab 0.25 mg' },
         { name: 'Zolax Tab 0.5 mg' },
         { name: 'Zolfin Tab 100 mg' },
-        { name: 'Zymet Pro Cap 325 mg' }
+        { name: 'Zymet Pro Cap 325 mg' },
+        { name: 'Zopride Tab 50 mg' },
+        { name: 'Suva I Tab' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

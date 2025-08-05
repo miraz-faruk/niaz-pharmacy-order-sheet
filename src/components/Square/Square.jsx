@@ -5,6 +5,7 @@ import 'jspdf-autotable';
 const Square = () => {
     const [values, setValues] = useState({});
     const [selectedItems, setSelectedItems] = useState([]);
+    const [activeTab, setActiveTab] = useState('General'); // 👈 for switching tabs
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
@@ -36,7 +37,6 @@ const Square = () => {
     // 🛠️ Update the quantity safely even when it's temporarily empty
     const handleUpdateSelectedItem = (e, itemName) => {
         const value = e.target.value;
-
         if (value === '' || /^[0-9]+$/.test(value)) {
             setSelectedItems(prevItems =>
                 prevItems.map(item =>
@@ -70,7 +70,7 @@ const Square = () => {
 
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
-        doc.text("Square Pharmaceuticals Ltd", 10, yPosition);
+        doc.text("Square Pharmaceuticals Ltd.", 10, yPosition);
         yPosition += 12;
 
         doc.setFontSize(12);
@@ -107,13 +107,13 @@ const Square = () => {
             yPosition += 10;
         });
 
-        doc.save('Square Pharmaceuticals.pdf');
+        doc.save(`Square-${activeTab.toLowerCase()}.pdf`);
     };
 
     // Sort items alphabetically
-    const items = [
+    const generalItems = [
         { name: "Ace Tab 500 mg" },
-        { name: "Ace Paediatric Drop 30 ml" },
+        { name: "Ace Pediatric Drop 30 ml" },
         { name: "Ace Suppository 125 mg" },
         { name: "Ace Suppository 250 mg" },
         { name: "Ace Suppository 500 mg" },
@@ -123,8 +123,6 @@ const Square = () => {
         { name: "Ace Plus Tab 500 mg+65 mg" },
         { name: "Ace Power Tab 1000 mg" },
         { name: "Ace XR Tab 665 mg" },
-        { name: "Adovas Syp 100 ml" },
-        { name: "Adovas Syp 200 ml" },
         { name: "Adryl Syp 100 ml" },
         { name: "Adsalt Tab 300 mg" },
         { name: "Afun Cream 1%" },
@@ -147,7 +145,6 @@ const Square = () => {
         { name: "Ambrox Syp 100 ml" },
         { name: "Ambrox Paediatric Drop 15 ml" },
         { name: "Ambrox SR Cap 75 mg" },
-        { name: "AmCivit Syp 100 ml" },
         { name: "Amodis Tab 400 mg" },
         { name: "Amodis Suspension 60 ml" },
         { name: "Anadol Suppository 100 mg" },
@@ -172,7 +169,6 @@ const Square = () => {
         { name: "Antazol Nasal Drop 0.05%" },
         { name: "Antazol Nasal Drop 0.1%" },
         { name: "Antazol Plus Nasal Spray" },
-        { name: "Antiscar Topical Gel" },
         { name: "Antista Syp 100 ml" },
         { name: "Anzitor Tab 20 mg" },
         { name: "Anzitor Tab 10 mg" },
@@ -183,7 +179,6 @@ const Square = () => {
         { name: "Ariprex Tab 10 mg" },
         { name: "Ariprex Oral Solution 50 ml" },
         { name: "Ariprex Tab 2 mg" },
-        { name: "Arubin Cap 500 mg" },
         { name: "Asynta Suspension 200 ml" },
         { name: "Asynta Chewable Tab" },
         { name: "Asynta Max Chewable Tab" },
@@ -193,7 +188,6 @@ const Square = () => {
         { name: "B-50 Forte Injection" },
         { name: "B - 50 Forte Syp 200 ml" },
         { name: "B - 9 Oral Solution 100 ml" },
-        { name: "Bacilax Cap 9 billion" },
         { name: "Bactrocin Ointment 2 %" },
         { name: "Barif Tab 40 mg" },
         { name: "Baritor Tab 2 mg" },
@@ -202,7 +196,6 @@ const Square = () => {
         { name: "Becospray Nasal Spray 50 mcg / spray" },
         { name: "Benostar Mouthwash 250 ml" },
         { name: "Benzapen Injection" },
-        { name: "Betaburn Ointment 0.25 %" },
         { name: "Betameson Cream 0.05 %" },
         { name: "Betameson Ointment 0.05 %" },
         { name: "Betameson - CL Cream" },
@@ -216,10 +209,6 @@ const Square = () => {
         { name: "Bilista Tab 20 mg" },
         { name: "Bilista Kids Tab 10 mg" },
         { name: "Bilista Syp" },
-        { name: "Bioprem Cap 10 mcg" },
-        { name: "Bioprem Cap 1 mcg" },
-        { name: "Bioprem Cap 2.5 mcg" },
-        { name: "Bioprem Cap 5 mcg" },
         { name: "Bisocam Tab 2.5 mg + 5 mg" },
         { name: "Bisocor Tab 5 mg" },
         { name: "Bisocor Tab 2.5 mg" },
@@ -258,8 +247,6 @@ const Square = () => {
         { name: "Candex Suspension 30 ml" },
         { name: "Carbizol Tab 10 mg" },
         { name: "Carbizol Tab 5 mg" },
-        { name: "Caripa Syp 200 ml" },
-        { name: "Caripa Cap 250 mg" },
         { name: "Carva Tab 75 mg" },
         { name: "Cavir Tab 1 mg" },
         { name: "Cavir Tab 0.5 mg" },
@@ -307,7 +294,6 @@ const Square = () => {
         { name: "Colicon Tab 10 mg" },
         { name: "Colicon Syp 50 ml" },
         { name: "Colimax Tab 0.6 mg" },
-        { name: "Colmint Cap" },
         { name: "Combicid Cream" },
         { name: "Comet Tab 850 mg" },
         { name: "Comet Tab 500 mg" },
@@ -323,12 +309,11 @@ const Square = () => {
         { name: "Cotrim DS Tab 800 mg+160 mg" },
         { name: "Cozycol Tab 800 mg" },
         { name: "D-Balance Oral Solution 2000 IU/ml 50 ml" },
-        { name: "D-Balance Injectable Solution (Oral & IM) 200000 IU/ml" },
+        { name: "D-Balance Injection 200000 IU" },
         { name: "D-Balance Cap 20000 IU" },
         { name: "D-Balance Cap 40000 IU" },
         { name: "D-Balance Cap 2000 IU" },
         { name: "D-Balance Cap 50000 IU" },
-        { name: "D-Sitol Cap 500 mg" },
         { name: "Daizy Tab 2 mg" },
         { name: "De-Rash Ointment" },
         { name: "De-Rash Plus Ointment" },
@@ -352,7 +337,6 @@ const Square = () => {
         { name: "Diliner DR DR Cap 20 mg" },
         { name: "Diliner DR DR Cap 60 mg" },
         { name: "Diltizem SR Tab 90 mg" },
-        { name: "DK Cap" },
         { name: "Dormitol Tab 7.5 mg" },
         { name: "Dotfix Tab 2 mg" },
         { name: "Dotfix Tab 1 mg" },
@@ -380,17 +364,13 @@ const Square = () => {
         { name: "Emolent Lotion" },
         { name: "Emolent Plus Cream" },
         { name: "Emoli Lotion 100 ml" },
-        { name: "Enerton Syp 200 ml" },
         { name: "Entacyd Suspension 200 ml" },
         { name: "Entacyd Plus Chewable Tab" },
         { name: "Entacyd Plus Suspension 200 ml" },
         { name: "Epitra Tab 1 mg" },
         { name: "Epitra Tab 0.5 mg" },
         { name: "Epitra Tab 2 mg" },
-        { name: "Eprim Cap 500 mg" },
-        { name: "Eprim Plus Cap 1000 mg" },
         { name: "Equra Cream 10%" },
-        { name: "Eredex Cap 5.4 mg" },
         { name: "Erian Suppository" },
         { name: "Erian Ointment" },
         { name: "Eromycin Lotion 3% 25 ml" },
@@ -398,8 +378,6 @@ const Square = () => {
         { name: "Eromycin Pediatric Drop" },
         { name: "Eromycin DS Tab 500 mg" },
         { name: "Esloric Tab 100 mg" },
-        { name: "Evit Cap 200 mg" },
-        { name: "Evit Cap 400 mg" },
         { name: "Eyevi Cap" },
         { name: "Ezex Ointment 0.05%" },
         { name: "Ezex Cream 0.05%" },
@@ -408,7 +386,6 @@ const Square = () => {
         { name: "Famotack Tab 20 mg" },
         { name: "Famotack Tab 40 mg" },
         { name: "Femastin Vaginal Cream 0.1%" },
-        { name: "Femony Cap" },
         { name: "Femotol Cap 30 mg" },
         { name: "Fentizol VT Vaginal Tab 600 mg" },
         { name: "Fexo Tab 120 mg" },
@@ -421,14 +398,10 @@ const Square = () => {
         { name: "Filwel Silver Tab" },
         { name: "Filwel Teen Hm Tab" },
         { name: "Filwel Teen Hr Tab" },
-        { name: "Fitvit Cap" },
         { name: "Flacol Chewable Tab 40 mg" },
         { name: "Flacol Pediatric Drop" },
         { name: "Flamfix Tab 750 mg" },
         { name: "Flamfix Tab 500 mg" },
-        { name: "Flemo Cap 40 mg" },
-        { name: "Flemo Max Cap" },
-        { name: "Flemo Plus Cap" },
         { name: "Flexi Tab 100 mg" },
         { name: "Flexi SR Tab 200 mg" },
         { name: "Flexilax Tab 5 mg" },
@@ -451,7 +424,6 @@ const Square = () => {
         { name: "Fona Plus Gel" },
         { name: "Fosfomax Powder" },
         { name: "Frabex Cap 500 mg" },
-        { name: "Freezy Nasal Inhaler" },
         { name: "Fungidal Cream 2%" },
         { name: "Fungidal-HC Cream 2%+1%" },
         { name: "Fusid Tab 40 mg" },
@@ -468,9 +440,6 @@ const Square = () => {
         { name: "Gelora Oral Gel 2%" },
         { name: "Genacyn Ointment 0.1%" },
         { name: "Geston Tab 5 mg" },
-        { name: "Giloba Cap 60 mg" },
-        { name: "Giloba Cap 120 mg" },
-        { name: "Gintex Cap 500 mg" },
         { name: "Gleazy Topical Gel" },
         { name: "Glympa Tab 25 mg+5 mg" },
         { name: "Glympa Tab 10 mg+5 mg" },
@@ -501,8 +470,6 @@ const Square = () => {
         { name: "Isotrin Cap 20 mg" },
         { name: "Isovent Tab 200 mcg" },
         { name: "Isovent Tab 600 mcg" },
-        { name: "Ispergul Eff. Powder 120 gm Container" },
-        { name: "Ispergul Eff. Powder 3.5 gm sachet" },
         { name: "Itra Cap 100 mg" },
         { name: "Itra Tab 200 mg" },
         { name: "Itra Oral Solution 100 ml" },
@@ -511,7 +478,6 @@ const Square = () => {
         { name: "Iventi Eye Drop 0.5%" },
         { name: "Iventi-D Eye Drop" },
         { name: "Invent Tab 400 mg" },
-        { name: "Jorvan Cap 500 mg" },
         { name: "K-One MM Injection 2 mg/0.2 ml" },
         { name: "Ketoral Tab 200 mg" },
         { name: "Kop SR Cap 100 mg" },
@@ -525,7 +491,6 @@ const Square = () => {
         { name: "Lebac Suspension 100 ml" },
         { name: "Lebac Pediatric Drop 15 ml" },
         { name: "Lebac Forte Suspension 100 ml" },
-        { name: "Lecor Syp 200 ml" },
         { name: "Lerozol Tab 2.5 mg" },
         { name: "Levocar Tab 330 mg" },
         { name: "Levostar Tab 1 mg" },
@@ -539,7 +504,6 @@ const Square = () => {
         { name: "Lipired Cap 200 mg" },
         { name: "Livacol Tab 5 mg" },
         { name: "Livacol Tab 10 mg" },
-        { name: "Livolite Cap 200 mg" },
         { name: "Livwel Syp 100 ml" },
         { name: "Livwel Syp 200 ml" },
         { name: "LNC Tab 5 mg" },
@@ -563,7 +527,6 @@ const Square = () => {
         { name: "Magnide Tab 365 mg" },
         { name: "Maxbon Tab 150 mg" },
         { name: "Maxbon Kit Tab 150 mg & 400 mg" },
-        { name: "Maximilk Cap" },
         { name: "Maxrin Cap 0.4 mg" },
         { name: "Maxrin D Cap 0.4 mg+0.5 mg" },
         { name: "Melano Cream" },
@@ -590,7 +553,6 @@ const Square = () => {
         { name: "Mirakof SR Tab 50 mg" },
         { name: "Mirapro Tab 7.5 mg" },
         { name: "Mirapro Tab 15 mg" },
-        { name: "Monera Syp 100 ml" },
         { name: "Montene Tab 4 mg" },
         { name: "Montene Tab 5 mg" },
         { name: "Montene Tab 10 mg" },
@@ -612,7 +574,6 @@ const Square = () => {
         { name: "Nafodil Cap 100 mg" },
         { name: "Nasovap Suspension for Inhalation 100 ml" },
         { name: "Naurif Tab 1 mg" },
-        { name: "Navit Cap 500 mg" },
         { name: "Nebanol Ointment" },
         { name: "Nebanol Powder" },
         { name: "Nebanol Plus Ointment" },
@@ -636,7 +597,6 @@ const Square = () => {
         { name: "Nexum MUPS Tab 20 mg" },
         { name: "Nexum MUPS Tab 40 mg" },
         { name: "Nidipine SR Tab 20 mg" },
-        { name: "Nilagel Cap 500 mg" },
         { name: "Nimocal Tab 30 mg" },
         { name: "Nomi Tab 2.5 mg" },
         { name: "Nomi Nasal Spray" },
@@ -644,7 +604,6 @@ const Square = () => {
         { name: "Norvis Tab 50 mg" },
         { name: "Norvis Syp 50 ml" },
         { name: "Ocof Syp 100 ml" },
-        { name: "Ocubil Cap 160 mg" },
         { name: "Ocubrom Eye Drop 0.07%" },
         { name: "Ofran Tab 8 mg" },
         { name: "Ofran Oral Solution 50 ml" },
@@ -674,7 +633,6 @@ const Square = () => {
         { name: "Penvik DS Tab 500 mg" },
         { name: "Penvik Forte Suspension 100 ml" },
         { name: "Peranel Tab 2 mg" },
-        { name: "Pepnor Syp 100 ml" },
         { name: "Peranel Tab 4 mg" },
         { name: "Perkidopa Tab 100 mg+ 10 mg" },
         { name: "Perkinil Tab 5 mg" },
@@ -691,9 +649,6 @@ const Square = () => {
         { name: "Prazolok Tab 2 mg" },
         { name: "Prazolok ER Tab 2.5 mg" },
         { name: "Prazolok ER Tab 5 mg" },
-        { name: "Probio Cap 4 billion" },
-        { name: "Probio (For kids) Powder" },
-        { name: "Probio R Cap 20 billion" },
         { name: "Prolert Cap 20 mg" },
         { name: "Promtil Tab 5 mg" },
         { name: "Pronor Tab 5 mg" },
@@ -711,22 +666,15 @@ const Square = () => {
         { name: "Rasalet Tab 0.5 mg" },
         { name: "Rasalet Tab 1 mg" },
         { name: "Rectocare Ointment 0.4%" },
-        { name: "Redclov Cap 40 mg" },
         { name: "Relatro Cap 25 mg" },
-        { name: "Reli Balm Cream" },
         { name: "Remac Tab 500 mg" },
         { name: "Remac Suspension 60 ml" },
         { name: "Remus Ointment 0.03%" },
         { name: "Remus Ointment 0.1%" },
-        { name: "Renacom Cap" },
         { name: "Renorma Tab 2.5 mg" },
         { name: "Renustat Tab 50 mg" },
         { name: "Repres SR Tab 1.5 mg" },
-        { name: "ResQ Cap 50 mg" },
-        { name: "ResQ Cap 100 mg" },
-        { name: "ResQ Cap 200 mg" },
         { name: "Retabac Ointment 1%" },
-        { name: "Revatol Syp 200 ml" },
         { name: "Revira Tab 500 mg" },
         { name: "Revira Tab 1 gm" },
         { name: "Revocit Tab 210 mg" },
@@ -765,7 +713,6 @@ const Square = () => {
         { name: "Siglimet Tab 50 mg+500 mg" },
         { name: "Siglimet Tab 50 mg+1000 mg" },
         { name: "Siglita Tab 50 mg" },
-        { name: "Silybin Cap 140 mg" },
         { name: "Sodibar Tab 600 mg" },
         { name: "Solider Tab 10 mg" },
         { name: "Solider Tab 5 mg" },
@@ -809,7 +756,6 @@ const Square = () => {
         { name: "Ticstop Tab 25 mg" },
         { name: "Tilex Max Tab 750 mg+50 mg" },
         { name: "Timotor Tab 100 mg" },
-        { name: "Toco Soft Cap 50 mg + 13.5 mg" },
         { name: "Tofator Tab 5 mg" },
         { name: "Togent Cream" },
         { name: "Tolfem Tab 200 mg" },
@@ -817,7 +763,6 @@ const Square = () => {
         { name: "Torax Tab 10 mg" },
         { name: "Torax Injection 60 mg/2 ml 2 ml ampoule" },
         { name: "Torax Injection 30 mg/ml 1 ml ampoule" },
-        { name: "Torel Muscle Rub" },
         { name: "Torsid Tab 20 mg" },
         { name: "Torsid Tab 5 mg" },
         { name: "Tory Tab 60 mg" },
@@ -830,7 +775,6 @@ const Square = () => {
         { name: "Tridyl Tab 5 mg" },
         { name: "Tridyl Syp 50 ml" },
         { name: "Trispray Nasal Spray" },
-        { name: "Trumega Cap 1000 mg" },
         { name: "Trupan Tab 20 mg" },
         { name: "Trupan Tab 40 mg" },
         { name: "Truxil Tab 30 mg+10 mg" },
@@ -844,10 +788,7 @@ const Square = () => {
         { name: "Ulrif Suspension 200 ml" },
         { name: "Ultivent Inhalation Cap 110 mcg+50 mcg" },
         { name: "Ultivent-M Inhalation Cap" },
-        { name: "Uripam Cap 160 mg" },
         { name: "Uriset Oral Solution 200 ml" },
-        { name: "Urobery Cap 400 mg" },
-        { name: "Urobery Syp 100 ml" },
         { name: "Urocure SR Cap" },
         { name: "Urso Tab 150 mg" },
         { name: "Urso Tab 300 mg" },
@@ -898,8 +839,6 @@ const Square = () => {
         { name: "Xylocon Nasal Drop 0.05%" },
         { name: "Xylocon Nasal Drop 0.025%" },
         { name: "Xylocon Nasal Spray 0.05%" },
-        { name: "Zanthin Cap 2 mg" },
-        { name: "Zanthin Cap 4 mg" },
         { name: "Zesup Syp 100 ml" },
         { name: "Zif Forte Cap" },
         { name: "Zif-A Tab" },
@@ -917,16 +856,102 @@ const Square = () => {
         { name: "Zox Tab 500 mg" },
         { name: "Zox Suspension 30 ml" },
         { name: "Sultolin Refill" },
-        { name: "DK 4000" },
+        { name: "DK 4000" }
     ].sort((a, b) => a.name.localeCompare(b.name));
+
+    const herbalItems = [
+        { name: "Adovas Syp 100 ml" },
+        { name: "Adovas Syp 200 ml" },
+        { name: "AmCivit Syp 100 ml" },
+        { name: "Antiscar Topical Gel" },
+        { name: "Arubin Cap 500 mg" },
+        { name: "Bacilax Cap 9 billion" },
+        { name: "Betaburn Ointment 0.25 %" },
+        { name: "Bioprem Cap 10 mcg" },
+        { name: "Bioprem Cap 1 mcg" },
+        { name: "Bioprem Cap 2.5 mcg" },
+        { name: "Bioprem Cap 5 mcg" },
+        { name: "Bolardi 250 mg" },
+        { name: "Bolardi 500 mg" },
+        { name: "Caripa Syp 200 ml" },
+        { name: "Caripa Cap 250 mg" },
+        { name: "Colmint Cap" },
+        { name: "D-Sitol Cap 500 mg" },
+        { name: "DK Cap" },
+        { name: "Enerton Syp 200 ml" },
+        { name: "Eprim Cap 500 mg" },
+        { name: "Eprim Plus Cap 1000 mg" },
+        { name: "Eredex Cap 5.4 mg" },
+        { name: "Evit Cap 200 mg" },
+        { name: "Evit Cap 400 mg" },
+        { name: "Femony Cap" },
+        { name: "Fitvit Cap" },
+        { name: "Flemo Cap 40 mg" },
+        { name: "Flemo Max Cap" },
+        { name: "Flemo Plus Cap" },
+        { name: "Freezy Nasal Inhaler" },
+        { name: "Giloba Cap 60 mg" },
+        { name: "Giloba Cap 120 mg" },
+        { name: "Gintex Cap 500 mg" },
+        { name: "Ispergul Eff. Powder 120 gm Container" },
+        { name: "Ispergul Eff. Powder 3.5 gm sachet" },
+        { name: "Jorvan Cap 500 mg" },
+        { name: "Lecor Syp 200 ml" },
+        { name: "Livolite Cap 200 mg" },
+        { name: "Maximilk Cap" },
+        { name: "Monera Syp 100 ml" },
+        { name: "Navit Cap 500 mg" },
+        { name: "Nilagel Cap 500 mg" },
+        { name: "Ocubil Cap 160 mg" },
+        { name: "Pepnor Syp 100 ml" },
+        { name: "Probio R Cap 20 billion" },
+        { name: "Probio Cap 4 billion" },
+        { name: "Probio (For kids) Powder" },
+        { name: "Redclov Cap 40 mg" },
+        { name: "Reli Balm Cream" },
+        { name: "Renacom Cap" },
+        { name: "ResQ Cap 50 mg" },
+        { name: "ResQ Cap 100 mg" },
+        { name: "ResQ Cap 200 mg" },
+        { name: "Revatol Syp 200 ml" },
+        { name: "Silybin Cap 140 mg" },
+        { name: "Toco Soft Cap" },
+        { name: "Torel Muscle Rub" },
+        { name: "Trumega Cap 1000 mg" },
+        { name: "Uripam Cap 160 mg" },
+        { name: "Urobery Cap 400 mg" },
+        { name: "Urobery Syp 100 ml" },
+        { name: "Zanthin Cap 2 mg" },
+        { name: "Zanthin Cap 4 mg" }
+    ].sort((a, b) => a.name.localeCompare(b.name));
+
+    const currentItems = activeTab === 'General' ? generalItems : herbalItems;
 
     return (
         <div className='mx-3'>
+            {/* Tabs */}
+            <div className='flex gap-3 my-4'>
+                <button
+                    className={`btn ${activeTab === 'General' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('General')}
+                >
+                    General
+                </button>
+                <button
+                    className={`btn ${activeTab === 'Herbal' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('Herbal')}
+                >
+                    Herbal
+                </button>
+            </div>
+
+            <h2 className='text-lg font-medium'>{activeTab} Items</h2>
             <div className='my-2'>
                 <hr />
             </div>
+
             <div>
-                {items.map(item => (
+                {currentItems.map(item => (
                     <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
                         <p className='col-span-2'>{item.name}</p>
                         <input
@@ -939,13 +964,14 @@ const Square = () => {
                         <button
                             className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
                             disabled={!values[item.name]}
-                            onClick={() => handleSelect(item.name)}
+                            onClick={() => handleSelect(item.name, activeTab)}
                         >
                             Select
                         </button>
                     </div>
                 ))}
             </div>
+
             <div className='mt-10'>
                 <hr />
                 <h2>Selected Items here:</h2>

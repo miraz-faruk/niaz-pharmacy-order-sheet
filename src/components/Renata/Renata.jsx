@@ -336,7 +336,8 @@ const Healthcare = () => {
         { name: "Nutrilina" },
         { name: "GoodGut" },
         { name: "JeeBee" },
-        { name: "Espirar" }
+        { name: "Espirar" },
+        { name: "Criptin Tab" }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
