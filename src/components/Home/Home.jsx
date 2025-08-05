@@ -13,6 +13,7 @@ import Eskayef from '../Eskayef/Eskayef';
 import NiproJMI from '../Nipro-JMI/Nipro-JMI';
 import Square from '../Square/Square';
 import ACME from '../ACME/ACME';
+import Ziska from '../Ziska/Ziska';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -103,6 +104,12 @@ const Home = () => {
                 >
                     Synovia Pharma
                 </button>
+                <button
+                    className="btn bg-sky-900 text-white mx-2"
+                    onClick={() => handleCompanySelect('Ziska')}
+                >
+                    Ziska
+                </button>
             </div>
 
             {/* Conditionally render the selected company's products */}
@@ -120,6 +127,7 @@ const Home = () => {
                 {selectedCompany === 'Renata' && <Renata></Renata>}
                 {selectedCompany === 'Square' && <Square></Square>}
                 {selectedCompany === 'Synovia' && <Synovia></Synovia>}
+                {selectedCompany === 'Ziska' && <Ziska></Ziska>}
             </div>
         </div>
     );
