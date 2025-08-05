@@ -14,6 +14,7 @@ import NiproJMI from '../Nipro-JMI/Nipro-JMI';
 import Square from '../Square/Square';
 import ACME from '../ACME/ACME';
 import Ziska from '../Ziska/Ziska';
+import Opsonin from '../Opsonin/Opsonin';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -81,6 +82,12 @@ const Home = () => {
                     Nuvista
                 </button>
                 <button
+                    className="btn bg-cyan-800 text-white mx-2"
+                    onClick={() => handleCompanySelect('Opsonin')}
+                >
+                    Opsonin
+                </button>
+                <button
                     className="btn bg-green-500 text-white mx-2"
                     onClick={() => handleCompanySelect('Radiant')}
                 >
@@ -123,6 +130,7 @@ const Home = () => {
                 {selectedCompany === 'Healthcare' && <Healthcare />}
                 {selectedCompany === 'NiproJMI' && <NiproJMI></NiproJMI>}
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
+                {selectedCompany === 'Opsonin' && <Opsonin></Opsonin>}
                 {selectedCompany === 'Radiant' && <Radiant />}
                 {selectedCompany === 'Renata' && <Renata></Renata>}
                 {selectedCompany === 'Square' && <Square></Square>}
