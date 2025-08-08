@@ -26,9 +26,9 @@ const Home = () => {
     return (
         <div>
             <Banner />
-            <div className="button-container text-center my-5 grid grid-cols-3 gap-3">
+            <div className="button-container text-center my-4 grid grid-cols-3 gap-2">
                 <button
-                    className="btn bg-cyan-500 text-white mx-2"
+                    className="btn bg-gray-500 text-white mx-2"
                     onClick={() => handleCompanySelect('ACME')}
                 >
                     ACME
@@ -70,7 +70,7 @@ const Home = () => {
                     Healthcare
                 </button>
                 <button
-                    className="btn bg-teal-500 text-white mx-2"
+                    className="btn bg-teal-400 text-white mx-2"
                     onClick={() => handleCompanySelect('NiproJMI')}
                 >
                     NIPRO JMI
@@ -82,13 +82,13 @@ const Home = () => {
                     Nuvista
                 </button>
                 <button
-                    className="btn bg-cyan-800 text-white mx-2"
+                    className="btn bg-yellow-700 text-white mx-2"
                     onClick={() => handleCompanySelect('Opsonin')}
                 >
                     Opsonin
                 </button>
                 <button
-                    className="btn bg-green-500 text-white mx-2"
+                    className="btn bg-green-600 text-white mx-2"
                     onClick={() => handleCompanySelect('Radiant')}
                 >
                     Radiant
@@ -106,7 +106,7 @@ const Home = () => {
                     Square
                 </button>
                 <button
-                    className="btn bg-lime-600 text-white mx-2"
+                    className="btn bg-lime-500 text-white mx-2"
                     onClick={() => handleCompanySelect('Synovia')}
                 >
                     Synovia Pharma

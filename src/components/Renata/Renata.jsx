@@ -5,6 +5,7 @@ import 'jspdf-autotable';
 const Healthcare = () => {
     const [values, setValues] = useState({});
     const [selectedItems, setSelectedItems] = useState([]);
+    const [activeTab, setActiveTab] = useState('General'); // 👈 for switching tabs
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
@@ -111,30 +112,21 @@ const Healthcare = () => {
     };
 
     // Sort items alphabetically
-    const items = [
+    const generalItems = [
         { name: 'Algin Inj' },
         { name: 'Algin Syp 50 ml' },
         { name: 'Algin Tab 50 mg' },
         { name: 'Alkanon DT Tab 1000mg' },
         { name: 'Alkanon Tab 500mg' },
         { name: 'Alkanon Tab 750mg' },
-        { name: 'Alphapress Tab 1mg' },
-        { name: 'Alphapress Tab 2mg' },
-        { name: 'Alphapress XR Tab 2.5mg' },
-        { name: 'Alphapress XR Tab 5mg' },
+        
         { name: 'Androcap Cap 40mg' },
         { name: 'Angela Tab 1mg' },
         { name: 'Beconex Syp 100 ml' },
         { name: 'Beconex Syp 200 ml' },
         { name: 'Becosules Gold Cap' },
-        { name: 'Bigmet Tab 500mg' },
-        { name: 'Bigmet Tab 850mg' },
-        { name: 'Bigmet XR Tab 500mg' },
-        { name: 'Bisoren M Tab 2.5mg' },
-        { name: 'Bisoren Plus Tab 2.5mg' },
-        { name: 'Bisoren Plus Tab 5mg' },
-        { name: 'Bisoren Tab 2.5mg' },
-        { name: 'Bisoren Tab 5mg' },
+
+        
         { name: 'Bredicon Tab 0.075mg' },
         { name: 'Cabolin Tab 0.5mg' },
         { name: 'Calcin-D Tab 500mg' },
@@ -142,8 +134,7 @@ const Healthcare = () => {
         { name: 'Calcin-M Tab' },
         { name: 'Calcin-O DS Tab 740mg' },
         { name: 'Calcin-O Tab 400mg' },
-        { name: 'Cardipin Plus Tab 50mg' },
-        { name: 'Cardipin Tab 5mg' },
+        
         { name: 'Cebuten Cap 400mg' },
         { name: 'Ceclofen Tab 100mg' },
         { name: 'Cilma Tab 10mg' },
@@ -166,9 +157,7 @@ const Healthcare = () => {
         { name: 'Denixil Tab 1mg' },
         { name: 'Denixil Tab 2mg' },
         { name: 'Desolon Tab 0.03mg' },
-        { name: 'Diampa M Tab 500mg' },
-        { name: 'Diampa Tab 10mg' },
-        { name: 'Diampa Tab 25mg' },
+
         { name: 'Domiren Pediatric Drop 5 ml' },
         { name: 'Domiren Suspension 60 ml' },
         { name: 'Domiren Tab 10mg' },
@@ -187,7 +176,7 @@ const Healthcare = () => {
         { name: 'Fenadin Tab 120mg' },
         { name: 'Fenadin Tab 180mg' },
         { name: 'Fenadin Tab 60mg' },
-        { name: 'Fenobate Cap 200mg' },
+
         { name: 'Ferix-V Cap' },
         { name: 'Flontin Suspension 250mg 60 ml' },
         { name: 'Flontin Tab 500mg' },
@@ -210,11 +199,8 @@ const Healthcare = () => {
         { name: 'Gaba-P CR Tab 82.5mg' },
         { name: 'Gestrenol Tab 5mg' },
         { name: 'Giane Tab 35' },
-        { name: 'Glicron CR Cap 30mg' },
-        { name: 'Glicron Tab 80mg' },
-        { name: 'Glinta Tab 5mg' },
-        { name: 'Glinta-M Tab 500mg' },
-        { name: 'Glinta-M Tab 850mg' },
+
+
         { name: 'Gynova Tab 2mg' },
         { name: 'Honycol Syp' },
         { name: 'Kiddi Syp 100 ml' },
@@ -244,7 +230,7 @@ const Healthcare = () => {
         { name: 'Neogest Tab 2mg' },
         { name: 'Neurobest Inj 3 ml' },
         { name: 'Neurobest Tab' },
-        { name: 'Nitroren SR Tab 2.6mg' },
+
         { name: 'Normanal Tab 500mg' },
         { name: 'Normens Tab 5mg' },
         { name: 'Norry Tab 3mg' },
@@ -261,9 +247,7 @@ const Healthcare = () => {
         { name: 'Orcef Suspension 70mg' },
         { name: 'Orcef Tab 200mg' },
         { name: 'Orcef Tab 400mg' },
-        { name: 'Ostan Plus Tab 50mg' },
-        { name: 'Ostan Tab 25mg' },
-        { name: 'Ostan Tab 50mg' },
+        
         { name: 'Ovulet Tab 100mg' },
         { name: 'Ovulet Tab 50mg' },
         { name: 'Plagrin Plus Tab 75mg' },
@@ -275,12 +259,9 @@ const Healthcare = () => {
         { name: 'Regumen Tab 0.05mg' },
         { name: 'Renxit Tab 0.5mg' },
         { name: 'Rephaston Tab 10mg' },
-        { name: 'Rezor Max Tab 5mg' },
-        { name: 'Rezor Tab 20mg' },
+        
         { name: 'Rolac Tab 10mg' },
-        { name: 'Rolip Tab 10mg' },
-        { name: 'Rolip Tab 20mg' },
-        { name: 'Rolip Tab 5mg' },
+
         { name: 'Salburen Inhaler 100mg' },
         { name: 'Saltica Inhalation Cap 50mg' },
         { name: 'Saltica Inhaler 25mg' },
@@ -288,15 +269,7 @@ const Healthcare = () => {
         { name: 'Sperid Tab 2mg' },
         { name: 'Sperid Tab 4mg' },
         { name: 'Stark Tab 10mg' },
-        { name: 'Taven Tab 10mg' },
-        { name: 'Taven Tab 20mg' },
-        { name: 'Telpro Max Tab 40mg' },
-        { name: 'Telpro Max Tab 80mg' },
-        { name: 'Telpro Plus Tab 40mg' },
-        { name: 'Telpro Plus Tab 80mg' },
-        { name: 'Telpro Tab 20mg' },
-        { name: 'Telpro Tab 40mg' },
-        { name: 'Telpro Tab 80mg' },
+        
         { name: 'Terbimax Cream 1% 10 gm' },
         { name: 'Terbimax Tab 250mg' },
         { name: 'Thyrox Tab 100mg' },
@@ -312,10 +285,10 @@ const Healthcare = () => {
         { name: 'Totifen Syp 100 ml' },
         { name: 'Totifen Tab 1mg' },
         { name: 'Tritin Tab 100mg' },
-        { name: 'Trizedon MR Tab 35mg' },
+
         { name: 'Trulax Syp 100 ml' },
         { name: 'Ulfix Suspension 200 ml' },
-        { name: 'Uritone Tab 20mg' },
+
         { name: 'VCAP VS' },
         { name: 'Valporin CR Tab 200mg' },
         { name: 'Valporin CR Tab 300mg' },
@@ -330,7 +303,7 @@ const Healthcare = () => {
         { name: 'Zodef Suspension 60 ml' },
         { name: 'Zodef Tab 24mg' },
         { name: 'Zodef Tab 6mg' },
-        { name: "Azisan Tablet 40 mg" },
+        
         { name: "Lactohil Powder" },
         { name: "Pregcare" },
         { name: "Nutrilina" },
@@ -340,13 +313,98 @@ const Healthcare = () => {
         { name: "Criptin Tab" }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
+    const cardiacItems = [
+        { name: 'Alphapress Tab 1mg' },
+        { name: 'Alphapress Tab 2mg' },
+        { name: 'Alphapress XR Tab 2.5mg' },
+        { name: 'Alphapress XR Tab 5mg' },
+        { name: 'Antogin ER Tab 500 mg' },
+        { name: "Azisan Tablet 40 mg" },
+        { name: "Azisan Plus 40/12.5 mg" },
+        { name: 'Bigmet Tab 500mg' },
+        { name: 'Bigmet Tab 850mg' },
+        { name: 'Bigmet XR Tab 500mg' },
+        { name: 'Bisoren M Tab 2.5mg' },
+        { name: 'Bisoren Plus Tab 2.5mg' },
+        { name: 'Bisoren Plus Tab 5mg' },
+        { name: 'Bisoren Tab 2.5mg' },
+        { name: 'Bisoren Tab 5mg' },
+        { name: 'Cardipin Plus Tab 50mg' },
+        { name: 'Cardipin Tab 5mg' },
+        { name: 'Cilma Tab 5mg' },
+        { name: 'Cilma Tab 10mg' },
+        { name: 'Diampa M Tab 500mg' },
+        { name: 'Diampa Tab 10mg' },
+        { name: 'Diampa Tab 25mg' },
+        { name: 'Entrovas Tab 50mg' },
+        { name: 'Entrovas Tab 100mg' },
+        { name: 'Entrovas Tab 200mg' },
+        { name: 'Fenobate Cap 200mg' },
+        { name: 'Glinta Tab 5mg' },
+        { name: 'Glinta-M Tab 2.5/500mg' },
+        { name: 'Glinta-M Tab 2.5/850mg' },
+        { name: 'Glinta Plus Tab 10mg' },
+        { name: 'Glinta Plus Tab 25mg' },
+        { name: 'Glicron CR Cap 30mg' },
+        { name: 'Glicron Tab 80mg' },
+        { name: 'Nitroren SR Tab 2.6mg' },
+        { name: 'Novelip Tab 180mg' },
+        { name: 'Ostan Plus Tab 50mg' },
+        { name: 'Ostan Tab 25mg' },
+        { name: 'Ostan Tab 50mg' },
+        { name: 'Phenocept 500mg' },
+        { name: 'Pendoril Tab 2mg' },
+        { name: 'Pendoril Tab 4mg' },
+        { name: 'Pendoril Plus Tab 4mg' },
+        { name: 'Pendoril Plus Tab 4mg' },
+        { name: 'Rolip Tab 10mg' },
+        { name: 'Rolip Tab 20mg' },
+        { name: 'Rolip Tab 5mg' },
+        { name: 'Rezor Max Tab 5mg' },
+        { name: 'Rezor Tab 20mg' },
+        { name: 'Sitacret M Tab 500mg' },
+        { name: 'Telpro Max Tab 40mg' },
+        { name: 'Telpro Max Tab 80mg' },
+        { name: 'Telpro Plus Tab 40mg' },
+        { name: 'Telpro Plus Tab 80mg' },
+        { name: 'Telpro Tab 20mg' },
+        { name: 'Telpro Tab 40mg' },
+        { name: 'Telpro Tab 80mg' },
+        { name: 'Taven Tab 10mg' },
+        { name: 'Taven Tab 20mg' },
+        { name: 'Taven EZ Tab 20mg' },
+        { name: 'Taven EZ Tab 10mg' },
+        { name: 'Trizedon MR Tab 35mg' },
+        { name: 'Uritone Tab 20mg' },
+    ].sort((a, b) => a.name.localeCompare(b.name));
+
+    const currentItems = activeTab === 'Cardiac' ? cardiacItems : generalItems;
+
     return (
         <div className='mx-3'>
+            {/* Tabs */}
+            <div className='flex gap-3 my-4'>
+                <button
+                    className={`btn ${activeTab === 'Cardiac' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('Cardiac')}
+                >
+                    Cardiac
+                </button>
+                <button
+                    className={`btn ${activeTab === 'General' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('General')}
+                >
+                    General
+                </button>
+            </div>
+
+            <h2 className='text-lg font-medium'>{activeTab} Items</h2>
             <div className='my-2'>
                 <hr />
             </div>
+
             <div>
-                {items.map(item => (
+                {currentItems.map(item => (
                     <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
                         <p className='col-span-2'>{item.name}</p>
                         <input
@@ -359,13 +417,14 @@ const Healthcare = () => {
                         <button
                             className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
                             disabled={!values[item.name]}
-                            onClick={() => handleSelect(item.name)}
+                            onClick={() => handleSelect(item.name, activeTab)}
                         >
                             Select
                         </button>
                     </div>
                 ))}
             </div>
+
             <div className='mt-10'>
                 <hr />
                 <h2>Selected Items here:</h2>
