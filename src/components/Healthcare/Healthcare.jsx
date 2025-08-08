@@ -49,30 +49,30 @@ const Healthcare = () => {
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
     const handleBuyNow = () => {
         const filteredItems = selectedItems.filter(item => item.quantity && parseInt(item.quantity) > 0);
-    
+
         if (filteredItems.length === 0) {
             alert("No valid items to generate PDF!");
             return;
         }
-    
+
         const doc = new jsPDF();
         let yPosition = 10;
         const pageHeight = doc.internal.pageSize.height;
-    
+
         doc.setFontSize(20);
         doc.setTextColor('Black');
         doc.text("Niaz Pharmacy", 10, yPosition);
         yPosition += 10;
-    
+
         const date = new Date().toLocaleDateString();
         doc.setFontSize(12);
         doc.text(`Date: ${date}`, 200, 10, { align: 'right' });
-    
+
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
         doc.text("Healthcare Pharmaceuticals Ltd.", 10, yPosition);
         yPosition += 12;
-    
+
         doc.setFontSize(12);
         doc.setTextColor('black');
         doc.setFont('helvetica', 'bold');
@@ -81,14 +81,14 @@ const Healthcare = () => {
         yPosition += 5;
         doc.line(5, yPosition, 200, yPosition);
         yPosition += 8;
-    
+
         doc.setFont('helvetica', 'normal');
-    
+
         filteredItems.forEach(item => {
             if (yPosition > pageHeight - 20) {
                 doc.addPage();
                 yPosition = 10;
-    
+
                 // Add header on new page
                 doc.setFontSize(12);
                 doc.setFont('helvetica', 'bold');
@@ -99,14 +99,14 @@ const Healthcare = () => {
                 yPosition += 8;
                 doc.setFont('helvetica', 'normal');
             }
-    
+
             doc.text(item.name, 10, yPosition);
             const quantityWidth = doc.getTextWidth(item.quantity.toString());
             const quantityX = 105 - quantityWidth;
             doc.text(item.quantity.toString(), quantityX, yPosition);
             yPosition += 10;
         });
-    
+
         doc.save('Healthcare Pharmaceuticals.pdf');
     };
 
@@ -252,6 +252,24 @@ const Healthcare = () => {
         { name: 'TR Care Eye Drop' },
         { name: 'Zoli 0.05% N/D' },
         { name: 'Zoli 0.025% N/D' },
+
+        { name: 'Denvar Powder 30 ml' },
+        { name: 'Denvar Powder 40 ml' },
+        { name: 'Denvar Powder 50 ml' },
+        { name: 'Denvar Powder 75 ml' },
+        { name: 'Tgdrop Tab 100 mg' },
+        { name: 'Sizonil Tab 1 mg' },
+        { name: 'Sizonil Tab 5 mg' },
+        { name: 'Skilox Cap 250 mg' },
+        { name: 'Skilox Cap 500 mg' },
+        { name: 'Rovast Tab 20 mg' },
+        { name: 'Rocal Jr Tab 250 mg' },
+        { name: 'Glymin Tab 500 mg' },
+        { name: 'Glymin Tab 850 mg' },
+        { name: 'Emistat Injection' },
+        { name: 'Betaval N Ointment' },
+        { name: 'Betafix AM Tab 5 mg' },
+        { name: 'Andep Tab 50 mg' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
