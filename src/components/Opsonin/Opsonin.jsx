@@ -517,7 +517,7 @@ const Opsonin = () => {
     return (
         <div className='mx-3'>
             {/* Tabs */}
-            <div className='flex gap-3 my-4'>
+            <div className='grid grid-cols-3 gap-3 my-4'>
                 <button
                     className={`btn ${activeTab === 'Cardiac' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                     onClick={() => setActiveTab('Cardiac')}
