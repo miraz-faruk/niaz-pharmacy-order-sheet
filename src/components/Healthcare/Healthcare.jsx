@@ -252,7 +252,6 @@ const Healthcare = () => {
         { name: 'TR Care Eye Drop' },
         { name: 'Zoli 0.05% N/D' },
         { name: 'Zoli 0.025% N/D' },
-
         { name: 'Denvar Powder 30 ml' },
         { name: 'Denvar Powder 40 ml' },
         { name: 'Denvar Powder 50 ml' },
@@ -269,7 +268,17 @@ const Healthcare = () => {
         { name: 'Emistat Injection' },
         { name: 'Betaval N Ointment' },
         { name: 'Betafix AM Tab 5 mg' },
-        { name: 'Andep Tab 50 mg' }
+        { name: 'Andep Tab 50 mg' },
+        { name: 'NFT Cap 100 mg' },
+        { name: 'Nepitan Tab 50 mg' },
+        { name: 'Nepitan Tab 100 mg' },
+        { name: 'Teana Tab 20 mg' },
+        { name: 'Teana Tab 40 mg' },
+        { name: 'Teana Tab 80 mg' },
+        { name: 'Teana AM Tab 5/40 mg' },
+        { name: 'Teana AM Tab 5/80 mg' },
+        { name: 'Teana Plus Tab 40/12.5 mg' },
+        { name: 'Teana Plus Tab 80/12.5 mg' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

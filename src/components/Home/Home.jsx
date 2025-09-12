@@ -15,6 +15,7 @@ import Square from '../Square/Square';
 import ACME from '../ACME/ACME';
 import Ziska from '../Ziska/Ziska';
 import Opsonin from '../Opsonin/Opsonin';
+import IbnSina from '../IbnSina/IbnSina';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -68,6 +69,12 @@ const Home = () => {
                     onClick={() => handleCompanySelect('Healthcare')}
                 >
                     Healthcare
+                </button>
+                <button
+                    className="btn bg-fuchsia-500 text-white mx-2"
+                    onClick={() => handleCompanySelect('IbnSina')}
+                >
+                    Ibn Sina
                 </button>
                 <button
                     className="btn bg-teal-400 text-white mx-2"
@@ -128,6 +135,7 @@ const Home = () => {
                 {selectedCompany === 'DrugInternational' && <DrugInternational></DrugInternational>}
                 {selectedCompany === 'Eskayef' && <Eskayef></Eskayef>}
                 {selectedCompany === 'Healthcare' && <Healthcare />}
+                {selectedCompany === 'IbnSina' && <IbnSina />}
                 {selectedCompany === 'NiproJMI' && <NiproJMI></NiproJMI>}
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
                 {selectedCompany === 'Opsonin' && <Opsonin></Opsonin>}

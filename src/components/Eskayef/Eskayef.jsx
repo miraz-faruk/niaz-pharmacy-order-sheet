@@ -346,7 +346,8 @@ const Eskayef = () => {
         { name: 'Zithrox Tab 500 mg' },
         { name: 'Zofra Oral Solution 50 ml' },
         { name: 'Zofra ODT Tab 4 mg' },
-        { name: 'Zofra ODT Tab 8 mg' }
+        { name: 'Zofra ODT Tab 8 mg' },
+        { name: 'SK Mox Tab 500 mg' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     const currentItems = activeTab === 'Cardiac' ? cardiacItems : generalItems;
