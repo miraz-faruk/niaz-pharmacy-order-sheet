@@ -115,7 +115,7 @@ const Ziska = () => {
         { name: "Ajardy Tab 10 mg" },
         { name: "Cholcut Tab 5 mg" },
         { name: "Cholcut Tab 10 mg" },
-        { name: "Closalic Ointment 10 gm" },
+        { name: "Closalic Oint 10 gm" },
         { name: "Dementa Tab 5 mg" },
         { name: "Dexilend Cap 60 mg" },
         { name: "Dexilend Cap 30 mg" },
