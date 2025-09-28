@@ -181,18 +181,21 @@ const Synovia = () => {
                 <hr />
                 <h2>Selected Items here:</h2>
                 <ul>
-                    {selectedItems.map((item, index) => (
-                        <li key={index} className='grid grid-cols-4 items-center gap-2'>
-                            <p className='col-span-2'>{item.name}</p>
-                            <input
-                                className='border border-green-200 py-3 px-2 rounded-lg text-center'
-                                type="number"
-                                value={item.quantity}
-                                onChange={(e) => handleUpdateSelectedItem(e, item.name)}
-                                min="1"
-                            />
-                        </li>
-                    ))}
+                    {selectedItems
+                        .slice() // make a copy (to avoid mutating original state)
+                        .sort((a, b) => a.name.localeCompare(b.name)) // sort alphabetically
+                        .map((item, index) => (
+                            <li key={index} className='grid grid-cols-4 items-center gap-2'>
+                                <p className='col-span-2'>{item.name}</p>
+                                <input
+                                    className='border border-green-200 py-3 px-2 rounded-lg text-center'
+                                    type="number"
+                                    value={item.quantity}
+                                    onChange={(e) => handleUpdateSelectedItem(e, item.name)}
+                                    min="1"
+                                />
+                            </li>
+                        ))}
                 </ul>
                 <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
                     Generate Order Sheet
