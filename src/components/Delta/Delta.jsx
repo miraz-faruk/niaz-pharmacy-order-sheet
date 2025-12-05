@@ -209,6 +209,7 @@ const Delta = () => {
         { name: 'Lonapam Tab 1 mg' },
         { name: 'Methotrax Tab 10 mg' },
         { name: 'Montela Tab 10 mg' },
+        { name: 'Niagra Tab 100 mg' },
         { name: 'Pelican Tab 20 mg' },
         { name: 'Pyrenol Tab 500 mg' },
         { name: 'RTV Tab 5 mg' },
@@ -256,7 +257,7 @@ const Delta = () => {
                 <ul>
                     {selectedItems
                         .slice() // make a copy (to avoid mutating original state)
-                        .sort((a, b) => a.name.localeCompare(b.name)) // sort alphabetically
+                        .sort((a, b) => a.name.localeCompare(b.name)) // sort alphabetically!qaz
                         .map((item, index) => (
                             <li key={index} className='grid grid-cols-4 items-center gap-2'>
                                 <p className='col-span-2'>{item.name}</p>
