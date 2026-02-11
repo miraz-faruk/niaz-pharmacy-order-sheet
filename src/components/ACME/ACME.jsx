@@ -341,7 +341,6 @@ const ACME = () => {
         { name: "Glifo Tab 25 mg" },
         { name: "Glifo Tab 10 mg" },
         { name: "Glifo-M Tab 12.5/500" },
-        { name: "Glifo-M Tab 12.5/500" },
         { name: "Glifo-M XR Tab 5/1000" },
         { name: "Glifo-M XR Tab 25/1000" },
         { name: "Glifo-M XR Tab 10/1000" },
