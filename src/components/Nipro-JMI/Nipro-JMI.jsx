@@ -146,7 +146,10 @@ const NiproJMI = () => {
         { name: 'Pandura Tab 2 mg' },
         { name: 'Rablet Tab 20 mg' },
         { name: 'Starcal D Tab' },
-        { name: 'V3N Tab' }
+        { name: 'V3N Tab' },
+        { name: 'Halopen Tab 250 mg' },
+        { name: 'Halopen Tab 500 mg' },
+        { name: 'Halopen Syp' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
