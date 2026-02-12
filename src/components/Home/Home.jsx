@@ -119,6 +119,12 @@ const Home = () => {
                     Synovia Pharma
                 </button>
                 <button
+                    className="btn bg-red-400 text-white mx-2"
+                    onClick={() => handleCompanySelect('UnimedUnihealth')}
+                >
+                    Unimed Unihealth
+                </button>
+                <button
                     className="btn bg-sky-900 text-white mx-2"
                     onClick={() => handleCompanySelect('Ziska')}
                 >
