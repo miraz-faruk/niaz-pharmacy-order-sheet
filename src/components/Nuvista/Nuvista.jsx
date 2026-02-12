@@ -113,7 +113,7 @@ const Nuvista = () => {
     const items = [
         { name: 'Allygest Tab 5 mg' },
         { name: 'Cortiflo Tab 6 mg' },
-        { name: 'Cleo Tab 35mg' },
+        { name: 'Cleo 35 mg Tab' },
         { name: 'Deca-Durabolin Inj .50 mg' },
         { name: 'Delanzo Cap 30 mg' },
         { name: 'Dinogest Tab 2 mg' },
@@ -148,6 +148,13 @@ const Nuvista = () => {
         { name: 'Valestra Tab 2mg' },
         { name: 'Visceralgine F.C. Tab 50 mg' },
         { name: 'Zoleta F.C. Tab 2.5 mg' },
+        { name: 'Elagox 150 mg Tab' },
+        { name: 'Elagox 200 mg Tab' },
+        { name: 'Farobac 150 mg Tab' },
+        { name: 'Farobac 200 mg Tab' },
+        { name: 'Fibropress Tab' },
+        { name: 'Nuvifer Cap' },
+        { name: 'Nuviron Tab' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

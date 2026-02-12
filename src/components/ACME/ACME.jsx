@@ -331,7 +331,8 @@ const ACME = () => {
         { name: "Folix Tab 5 mg" },
         { name: "Folix Tab 15 mg" },
         { name: "Folive Tab 400 mg" },
-        { name: "Fero Kid Syp" },
+        { name: "FeroKid Syp 100 ml" },
+        { name: "FeroKid Syp 200 ml" },
         { name: "Gavisus Chewable Tab" },
         { name: "Gavisus Suspension 200 ml" },
         { name: "Gavisus DX Suspension 200 ml" },
@@ -596,6 +597,16 @@ const ACME = () => {
         { name: "Zis-DS Syp 100 ml" },
         { name: "Zolidon Tab 400 mg" },
         { name: "Zolidon Tab 600 mg" },
+        { name: "CKDpro Cap 45 Billion" },
+        { name: "Egolix Tab 150 mg" },
+        { name: "Egolix Tab 200 mg" },
+        { name: "Basok Plus 150 ml" },
+        { name: "Itrakill SB Cap 65 mg" },
+        { name: "Rezim Tab 60 mg" },
+        { name: "Rezim Tab 80 mg" },
+        { name: "Rezim Tab 100 mg" },
+        { name: "Farospec Tab 150 mg" },
+        { name: "Farospec Tab 200 mg" },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (
