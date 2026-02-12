@@ -132,6 +132,9 @@ const NiproJMI = () => {
         { name: 'EmpaMet Tab 12.5/850' },
         { name: 'EmpaMet Tab 5/1000' },
         { name: 'EmpaMet Tab 12.5/500' },
+        { name: 'Halopen Tab 250 mg' },
+        { name: 'Halopen Tab 500 mg' },
+        { name: 'Halopen Syp' },
         { name: 'Lijenta Tab 5 mg' },
         { name: 'Lijenta-M Tab 500 mg' },
         { name: 'Lijenta-M Tab 850 mg' },
@@ -147,9 +150,6 @@ const NiproJMI = () => {
         { name: 'Rablet Tab 20 mg' },
         { name: 'Starcal D Tab' },
         { name: 'V3N Tab' },
-        { name: 'Halopen Tab 250 mg' },
-        { name: 'Halopen Tab 500 mg' },
-        { name: 'Halopen Syp' },
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

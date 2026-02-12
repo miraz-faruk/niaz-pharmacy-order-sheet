@@ -2,9 +2,10 @@ import { useState } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const Nuvista = () => {
+const Popular = () => {
     const [values, setValues] = useState({});
     const [selectedItems, setSelectedItems] = useState([]);
+    const [activeTab, setActiveTab] = useState('Cardiac'); // 👈 for switching tabs
 
     const handleChange = (e, itemName) => {
         const value = e.target.value;
@@ -36,7 +37,6 @@ const Nuvista = () => {
     // 🛠️ Update the quantity safely even when it's temporarily empty
     const handleUpdateSelectedItem = (e, itemName) => {
         const value = e.target.value;
-
         if (value === '' || /^[0-9]+$/.test(value)) {
             setSelectedItems(prevItems =>
                 prevItems.map(item =>
@@ -45,6 +45,7 @@ const Nuvista = () => {
             );
         }
     };
+
 
     // 🧾 Generate PDF while filtering out empty or zero-quantity items
     const handleBuyNow = () => {
@@ -70,7 +71,7 @@ const Nuvista = () => {
 
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
-        doc.text("Nuvista Pharma Ltd.", 10, yPosition);
+        doc.text("Popular Pharmaceuticals Ltd", 10, yPosition);
         yPosition += 12;
 
         doc.setFontSize(12);
@@ -107,61 +108,132 @@ const Nuvista = () => {
             yPosition += 10;
         });
 
-        doc.save('Nuvista Pharma.pdf');
+        doc.save(`Popular-${activeTab.toLowerCase()}.pdf`);
     };
 
-    const items = [
-        { name: 'Allygest Tab 5 mg' },
-        { name: 'Cortiflo Tab 6 mg' },
-        { name: 'Cleo 35 mg Tab' },
-        { name: 'Deca-Durabolin Inj .50 mg' },
-        { name: 'Delanzo Cap 30 mg' },
-        { name: 'Dinogest Tab 2 mg' },
-        { name: 'Dydron F.C. Tab 10mg' },
-        { name: 'Decalin VT' },
-        { name: 'Durabolin Inj 25 mg' },
-        { name: 'Elisa F.C. Tab' },
-        { name: 'Elagox 150 mg Tab' },
-        { name: 'Elagox 200 mg Tab' },
-        { name: 'Farobac 150 mg Tab' },
-        { name: 'Farobac 200 mg Tab' },
-        { name: 'Fibropress Tab' },
-        { name: 'Ferobac Tab 150mg' },
-        { name: 'Freemax F.C. Tab 100 mg' },
-        { name: 'Itonorm Tab 50 mg' },
-        { name: 'Linda-S DS Inj 10' },
-        { name: 'Lynes Tab' },
-        { name: 'Marvelon Tab' },
-        { name: 'Microlon Tab' },
-        { name: 'Magnox 365 Tab' },
-        { name: 'Norestin Tab 5 mg' },
-        { name: 'Nuliza Cream' },
-        { name: 'Nuvifer Cap' },
-        { name: 'Nuviron Tab' },
-        { name: 'Oradexon Tab 0.5 mg' },
-        { name: 'Orgatril Tab 5 mg' },
-        { name: 'Ovestin Tab 1 mg' },
-        { name: 'Ovostat Gold Tab' },
-        { name: 'Roxadex Inj 5 mg' },
-        { name: 'Sagdon 10 Tab' },
-        { name: 'Thyronor 25' },
-        { name: 'Tibilon Tab 2.5 mg' },
-        { name: 'Traxyl Cap 500 mg' },
-        { name: 'Thyronor 12.50' },
-        { name: 'Thyronor 50' },
-        { name: 'Thyronor 75' },
-        { name: 'Thyronor 100' },
-        { name: 'Uroza Tab 200mg' },
-        { name: 'Valestra Tab 2mg' },
-        { name: 'Visceralgine F.C. Tab 50 mg' },
-        { name: 'Zoleta F.C. Tab 2.5 mg' },
+    // Cardiac items
+    const cardiacItems = [
+        { name: 'Amlovas AT' },
+        { name: 'Betacor 5 mg' },
+        { name: 'Cilnivas 5 mg' },
+        { name: 'Cilnivas 10 mg' },
+        { name: 'Hypophos 667 mg' },
+        { name: 'Nitrovas SR 2.6 mg' },
+        { name: 'Olmevas 20 mg' },
+        { name: 'Olmevas 40 mg' },
+        { name: 'Olmevas AM 5/20' },
+        { name: 'Olmevas AM 5/40' },
+        { name: 'Olmevas HZ' },
+        { name: 'Ramil 1.25 mg' },
+        { name: 'Ramil 2.5 mg' },
+        { name: 'Ramil 5 mg' },
+        { name: 'Sodicarb 600 mg' },
+        { name: 'Sodiclor 300 mg' },
+        { name: 'Sodiclor 600 mg' },
+        { name: 'Spirocard 25 mg' },
+        { name: 'Spirocard 50 mg' },
+        { name: 'Spirocard 100 mg' },
+        { name: 'Spirocard Plus' },
+        { name: 'Telmivas 40 mg' },
+        { name: 'Telmivas 80 mg' },
+        { name: 'Telmivas 20 mg' },
     ].sort((a, b) => a.name.localeCompare(b.name));
+
+    // General items
+    const generalItems = [
+        { name: 'Anzet Tablet' },
+        { name: 'B126 Tablet' },
+        { name: 'Bilastin Oral Solution' },
+        { name: 'Bilastin Tablet' },
+        { name: 'Bilastin Kids Tablet' },
+        { name: 'Bonigen Tablet' },
+        { name: 'Clavurox Tablet' },
+        { name: 'Clavurox Tablet' },
+        { name: 'Colacap Capsule' },
+        { name: 'Combiderm Cream' },
+        { name: 'Dexogut Capsule' },
+        { name: 'Dexogut Capsule' },
+        { name: 'Domilux Tablet' },
+        { name: 'Ebatin Syrup' },
+        { name: 'Ebatin Tablet' },
+        { name: 'Ebatin Fast Tablet' },
+        { name: 'Elagolic Tablet' },
+        { name: 'Elagolic Tablet' },
+        { name: 'Gavisco Suspension' },
+        { name: 'Gemiflox Tablet' },
+        { name: 'Itolux Tablet' },
+        { name: 'Kalcoral kit Tablet' },
+        { name: 'Kalcoral-C Tablet' },
+        { name: 'Kalcoral-D Tablet' },
+        { name: 'Kalcoral-DX Tablet' },
+        { name: 'Kalcoral-K Tablet' },
+        { name: 'Laxopic Tablet' },
+        { name: 'Laxopic Oral Solution' },
+        { name: 'Laxopride Tablet' },
+        { name: 'Laxopride Tablet' },
+        { name: 'Lindac Tablet' },
+        { name: 'Lindac Tablet' },
+        { name: 'M-lucas Chewable Tablet' },
+        { name: 'M-lucas Chewable Tablet' },
+        { name: 'M-lucas Tablet' },
+        { name: 'Migalin Tablet' },
+        { name: 'Migalin Tablet' },
+        { name: 'Migalin Tablet' },
+        { name: 'Moxibac Tablet' },
+        { name: 'N-Sol Nasal Drop' },
+        { name: 'Nabumax Tablet' },
+        { name: 'Nabumax Tablet' },
+        { name: 'Naspro Plus Tablet' },
+        { name: 'Naspro Plus Tablet' },
+        { name: 'Obecol Tablet' },
+        { name: 'Obecol Tablet' },
+        { name: 'Pegalin Capsule' },
+        { name: 'Pegalin Capsule' },
+        { name: 'Pegalin Capsule' },
+        { name: 'Pegalin ER Tablet' },
+        { name: 'Pegalin ER Tablet' },
+        { name: 'Progut Tablet' },
+        { name: 'Progut Capsule' },
+        { name: 'Progut Capsule' },
+        { name: 'Progut MUPS Tablet' },
+        { name: 'Progut MUPS Tablet' },
+        { name: 'Rabigut Tablet' },
+        { name: 'Toramax Tablet' },
+        { name: 'Vonomax Tablet' },
+        { name: 'Vonomax Tablet 10 mg' },
+        { name: 'Vonomax Duo Tablet' },
+        { name: 'Vonomax Trio Tablet' },
+        { name: 'Zemicef Capsule' },
+        { name: 'Zemicef Capsule' },
+    ].sort((a, b) => a.name.localeCompare(b.name));
+
+    const currentItems = activeTab === 'Cardiac' ? cardiacItems : generalItems;
 
     return (
         <div className='mx-3'>
-            <div className='my-2'><hr /></div>
+            {/* Tabs */}
+            <div className='flex gap-3 my-4'>
+                <button
+                    className={`btn ${activeTab === 'Cardiac' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('Cardiac')}
+                >
+                    Cardiac
+                </button>
+                <button
+                    className={`btn ${activeTab === 'General' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                    onClick={() => setActiveTab('General')}
+                >
+                    General
+                </button>
+            </div>
+
+            <h2 className='text-lg font-medium'>{activeTab} Items</h2>
+            <div className='my-2'>
+                <hr />
+            </div>
+
             <div>
-                {items.map(item => (
+                {currentItems.map(item => (
                     <div key={item.name} className='grid grid-cols-4 items-center gap-2'>
                         <p className='col-span-2'>{item.name}</p>
                         <input
@@ -169,18 +241,19 @@ const Nuvista = () => {
                             type="number"
                             value={values[item.name] || ''}
                             onChange={(e) => handleChange(e, item.name)}
-                            min="0"
+                            min="1"
                         />
                         <button
-                            className={`btn text-white rounded-xl ${parseInt(values[item.name]) > 0 ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
-                            disabled={!parseInt(values[item.name])}
-                            onClick={() => handleSelect(item.name, item.type)}
+                            className={`btn text-white rounded-xl ${values[item.name] ? 'bg-purple-300' : 'bg-gray-300 cursor-not-allowed'}`}
+                            disabled={!values[item.name]}
+                            onClick={() => handleSelect(item.name, activeTab)}
                         >
                             Select
                         </button>
                     </div>
                 ))}
             </div>
+
             <div className='mt-10'>
                 <hr />
                 <h2>Selected Items here:</h2>
@@ -196,12 +269,12 @@ const Nuvista = () => {
                                     type="number"
                                     value={item.quantity}
                                     onChange={(e) => handleUpdateSelectedItem(e, item.name)}
-                                    min="0"
+                                    min="1"
                                 />
                             </li>
                         ))}
                 </ul>
-                <button className='btn my-5 bg-blue-500 text-white text-xl' onClick={handleBuyNow}>
+                <button className='btn bg-green-500 text-white my-3 rounded-xl' onClick={handleBuyNow}>
                     Generate Order Sheet
                 </button>
             </div>
@@ -209,4 +282,4 @@ const Nuvista = () => {
     );
 };
 
-export default Nuvista;
+export default Popular;

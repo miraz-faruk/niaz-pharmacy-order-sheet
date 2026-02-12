@@ -137,6 +137,7 @@ const Radiant = () => {
         { name: 'Exium MUPS Tab 40 mg' },
         { name: 'Eggcal-D Tab 500 mg' },
         { name: 'Eggcal-DX Tab 600 mg' },
+        { name: 'Exforge 10/160' },
         { name: 'Fabetor Tab 120 mg' },
         { name: 'Fabetor Tab 60 mg' },
         { name: 'Fabetor Tab 90 mg' },
@@ -150,6 +151,7 @@ const Radiant = () => {
         { name: 'Lexotanil Tab 3 mg' },
         { name: 'Lizid Tab 400 mg' },
         { name: 'Lizid Tab 600 mg' },
+        { name: 'Ludiomil Tab' },
         { name: 'Minista Tab 10 mg' },
         { name: 'Naprosyn DPS 125 mg' },
         { name: 'Naprosyn Tab 250 mg' },
@@ -207,8 +209,6 @@ const Radiant = () => {
         { name: 'Xionil 3 mg' },
         { name: 'Mitosan 40 mg' },
         { name: 'Mitosan 80 mg' },
-        { name: 'Ludiomil Tab' },
-        { name: 'Exforge 10/160' }
     ].sort((a, b) => a.name.localeCompare(b.name));
 
     return (

@@ -16,6 +16,8 @@ import ACME from '../ACME/ACME';
 import Ziska from '../Ziska/Ziska';
 import Opsonin from '../Opsonin/Opsonin';
 import IbnSina from '../IbnSina/IbnSina';
+import UnimedUnihealth from '../UnimedUnihealth/UnimedUnihealth';
+import Popular from '../Popular/Popular';
 
 const Home = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -95,6 +97,12 @@ const Home = () => {
                     Opsonin
                 </button>
                 <button
+                    className="btn bg-stone-900 text-white mx-2"
+                    onClick={() => handleCompanySelect('Popular')}
+                >
+                    Popular
+                </button>
+                <button
                     className="btn bg-green-600 text-white mx-2"
                     onClick={() => handleCompanySelect('Radiant')}
                 >
@@ -145,10 +153,12 @@ const Home = () => {
                 {selectedCompany === 'NiproJMI' && <NiproJMI></NiproJMI>}
                 {selectedCompany === 'Nuvista' && <Nuvista></Nuvista>}
                 {selectedCompany === 'Opsonin' && <Opsonin></Opsonin>}
+                {selectedCompany === 'Popular' && <Popular></Popular>}
                 {selectedCompany === 'Radiant' && <Radiant />}
                 {selectedCompany === 'Renata' && <Renata></Renata>}
                 {selectedCompany === 'Square' && <Square></Square>}
                 {selectedCompany === 'Synovia' && <Synovia></Synovia>}
+                {selectedCompany === 'UnimedUnihealth' && <UnimedUnihealth></UnimedUnihealth>}
                 {selectedCompany === 'Ziska' && <Ziska></Ziska>}
             </div>
         </div>
