@@ -136,6 +136,8 @@ const NiproJMI = () => {
         { name: 'Halopen Tab 500 mg' },
         { name: 'Halopen Syp' },
         { name: 'Lijenta Tab 5 mg' },
+        { name: 'Lijenta-MX Tab 2.5/1000 mg' },
+        { name: 'Lijenta-MX Tab 5/1000 mg' },
         { name: 'Lijenta-M Tab 500 mg' },
         { name: 'Lijenta-M Tab 850 mg' },
         { name: 'Lijenta-M Tab 1000 mg' },

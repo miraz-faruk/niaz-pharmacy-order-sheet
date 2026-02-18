@@ -374,6 +374,7 @@ const DrugInternational = () => {
         { name: 'Rostatin Tab 10 mg' },
         { name: 'Rostatin Tab 20 mg' },
         { name: 'Rostatin Tab 5 mg' },
+        { name: 'Savatril tab 50 mg' },
         { name: 'Seacal-D Tab 500 mg' },
         { name: 'Seacal-DX Tab 600 mg' },
         { name: 'Semecon Pediatric Drop 20 ml' },
