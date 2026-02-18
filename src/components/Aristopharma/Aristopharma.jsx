@@ -261,6 +261,7 @@ const Aristopharma = () => {
         { name: 'Ipec-Plus Tab' },
         { name: 'Ipec-Super Cap' },
         { name: 'Itopa-50 Tab' },
+        { name: 'Joinflex-M Tab' },
         { name: 'Ketozol Shampoo 2%' },
         { name: 'Luiz Cream 1%' },
         { name: 'Maxicon Syp 200 ml' },
